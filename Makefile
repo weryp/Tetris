@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sun Feb 28 06:27:14 2016 Paul Wery
-## Last update Sun Feb 28 07:17:56 2016 Paul Wery
+## Last update Mon Feb 29 15:36:37 2016 Paul Wery
 ##
 
 NAME	=	tetris
@@ -28,7 +28,7 @@ $(NAME)	:	$(OBJS)
 clean	:
 		$(RM) $(OBJS)
 
-flcean	:	clean
+fclean	:	clean
 		$(RM) $(NAME)
 
 re	:	fclean all
