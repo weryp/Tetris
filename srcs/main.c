@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 07:09:19 2016 Paul Wery
-** Last update Mon Feb 29 18:01:42 2016 Paul Wery
+** Last update Mon Feb 29 18:08:19 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -27,20 +27,20 @@ int	error_size()
 
 int	create_aff_map(char **map, int n, int i)
 {
-  while (n < 20)
+  while (n < 22)
     {
       i = 0;
-      while (i < 13)
+      while (i < 12)
 	{
 	  if ((map[n] = malloc(13)) == NULL)
 	    return (-1);
-	  if (n == 0 || n == 19)
+	  if (n == 0 || n == 21)
 	    map[n][i] = '-';
-	  else if (i == 0 || i == 12)
+	  else if (i == 0 || i == 11)
 	    map[n][i] = '|';
 	  else
 	    map[n][i] = ' ';
-	  mvprintw((LINES / 2) - 10  + n, (COLS / 2) + 2 + i, &map[n][i]);
+	  mvprintw((LINES / 2) - 11  + n, (COLS / 2) + 2 + i, &map[n][i]);
 	  i += 1;
 	}
       map[n++][i] = '\0';
@@ -52,7 +52,7 @@ int	create_aff_map(char **map, int n, int i)
 int	ini_tetris(const char *file, char **map)
 {
   newterm(file, stderr, stdin);
-  if ((map = malloc(21 * sizeof(char*))) == NULL)
+  if ((map = malloc(23 * sizeof(char*))) == NULL)
     return (-1);
   if (create_aff_map(map, 0, 0) == -1)
     return (-1);

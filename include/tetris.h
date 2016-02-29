@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Mon Feb 29 18:05:31 2016 Paul Wery
+** Last update Mon Feb 29 18:20:11 2016 Paul Wery
 */
 
 #ifndef TETRIS_H_
@@ -23,7 +23,7 @@
 
 typedef struct	s_obj
 {
-  int		tetrimino;
+  char		**tetrimino;
   int		form;
   int		color;
   char		size[5];
