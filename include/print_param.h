@@ -5,10 +5,53 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Feb 29 15:54:56 2016 Paul Wery
-** Last update Mon Feb 29 15:55:31 2016 Paul Wery
+** Last update Mon Feb 29 18:39:20 2016 victor hoarau
 */
 
 #ifndef PARAM_H_
 # define PARAM_H_
+
+# define MAX_SCORE_SIZE (12)
+
+typedef	struct	s_pos
+{
+  int		x;
+  int		y;
+}		t_pos;
+
+typedef	struct	s_scorebox
+{
+  int		level
+  int		player_score;
+  int		best_score;
+  int		time;
+  t_pos		pos;
+  t_pos		size;
+}		t_scorebox;
+
+typedef	struct	s_title
+{
+  char		*title;
+  t_pos		pos;
+}		t_title;
+
+typedef	struct	s_nextbox
+{
+  t_obj		obj;
+  t_pos		pos;
+  t_pos		size;
+}		t_nextbox;
+
+typedef	struct	s_display_game_param
+{
+  t_pos		term_size;
+  t_scorebox	scorebox;
+  t_nextbox	nextbox;
+  t_title	title;
+}		t_display_game_param;
+
+int check_terminal_size(t_display_game_param*);
+int update_display_game(t_display_game_param*);
+int init_display_param(t_display_game_param*);
 
 #endif /* !PARAM_H_ */
