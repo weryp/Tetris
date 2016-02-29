@@ -5,17 +5,19 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Mon Feb 29 15:55:39 2016 Paul Wery
+** Last update Mon Feb 29 18:05:31 2016 Paul Wery
 */
 
 #ifndef TETRIS_H_
 # define TETRIS_H_
 
-# define WIDTH_NEED (42)
-# define HEIGHT_NEED (20)
+# define WIDTH_NEED (48)
+# define HEIGHT_NEED (22)
 # define START_INTERFACE_H (6)
 # define WIDTH_TAB_SCORE (20)
 # define GAP (4)
+
+# define UNUSED __attribute__((unused))
 
 # include "print_param.h"
 
