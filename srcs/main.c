@@ -5,10 +5,11 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 07:09:19 2016 Paul Wery
-** Last update Sun Feb 28 07:27:16 2016 Paul Wery
+** Last update Mon Feb 29 15:27:09 2016 Paul Wery
 */
 
 #include "tetris.h"
+#include "curses.h"
 
 int	main()
 {
