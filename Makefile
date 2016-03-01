@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sun Feb 28 06:27:14 2016 Paul Wery
-## Last update Mon Feb 29 15:36:37 2016 Paul Wery
+## Last update Tue Mar  1 22:05:13 2016 Paul Wery
 ##
 
 NAME	=	tetris
@@ -18,7 +18,13 @@ CFLAGS	=	-W -Wall -Werror -ansi -pedantic -Iinclude
 
 OBJS	=	$(SRCS:.c=.o)
 
-SRCS	=	srcs/main.c
+SRCS	=	srcs/main.c \
+		srcs/load_tetriminos.c \
+		srcs/load_objs.c \
+		srcs/my_list.c \
+		srcs/usefull_functions.c \
+		srcs/test_aff_tetrimino.c \
+		srcs/create_form_tetriminos.c
 
 all	:	$(NAME)
 

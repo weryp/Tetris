@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Tue Mar  1 23:42:34 2016 Paul Wery
+** Last update Tue Mar  1 22:01:46 2016 Paul Wery
 */
 
 #ifndef TETRIS_H_
@@ -59,9 +59,9 @@ int		load_tetriminos(t_tetris *list);
 int		load_objs(char *buffer, char *name, t_tetris *list);
 t_tetris	*create_list(void);
 int		add_elem_next(t_tetris *elem, char *name, t_obj *obj);
-int		add_next_form(t_tetris *elem, t_obj *obj, char **tetrimino);
+int		add_next_form(t_tetris *elem, t_obj *obj);
 void		delete_list(t_tetris **root);
-void		aff_tetrimino(char **tetrimino);
+void		ff_tetrimino(char **tetrimino);
 int		create_others_forms(t_tetris *list, t_obj *obj);
 
 #endif /* !TETRIS_H_ */

@@ -5,14 +5,14 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 07:09:19 2016 Paul Wery
-** Last update Mon Feb 29 18:08:19 2016 Paul Wery
+** Last update Tue Mar  1 03:42:26 2016 Paul Wery
 */
 
 #include <curses.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "tetris.h"
-#include <stdio.h>
+
 int	error_size()
 {
   if (LINES < 20 || COLS < 44)
@@ -63,20 +63,24 @@ int	ini_tetris(const char *file, char **map)
 
 int		main()
 {
-  WINDOW	*new_win;
-  char		**map;
-  int		key;
+  /*  WINDOW	*new_win;
+      char		**map;*/
+  t_tetris	*tet;
+  /*int		key;*/
 
-  key = 0;
+  /*key = 0;
   new_win = initscr();
-  map = NULL;
-  if (ini_tetris((const char*)new_win, map) == 0)
-    while (key != 10)
-      {
-	refresh();
-	nodelay(new_win, TRUE);
-	key = getch();
-      }
-  endwin();
+  map = NULL;*/
+  tet = create_list();
+  load_tetriminos(tet);
+  /*if (load_tetriminos(tet) == 0)
+        if (ini_tetris((const char*)new_win, map) == 0)
+      while (key != 10)
+	{
+	  refresh();
+	  nodelay(new_win, TRUE);
+	  key = getch();
+	}
+	endwin();*/
   return (0);
 }
