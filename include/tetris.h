@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Tue Mar  1 23:42:34 2016 Paul Wery
+** Last update Thu Mar  3 00:32:25 2016 Paul Wery
 */
 
 #ifndef TETRIS_H_
@@ -24,6 +24,14 @@
 
 typedef struct dirent t_dir;
 typedef struct stat t_stat;
+
+typedef struct	s_start_pos
+{
+  int		start_x;
+  int		start_y;
+  int		end_x;
+  int		end_y;
+}		t_start_pos;
 
 typedef struct	s_obj
 {
@@ -44,6 +52,17 @@ typedef struct		s_tetris
   struct s_tetris	*next_form;
 }			t_tetris;
 
+typedef struct	s_events
+{
+  t_tetris	*it;
+  t_start_pos	pos;
+  int		key;
+  int		form;
+  int		nb_tet;
+  int		tet_clear;
+  int		tetrimino;
+}		t_events;
+
 typedef struct	s_score
 {
   int		time;
@@ -63,5 +82,12 @@ int		add_next_form(t_tetris *elem, t_obj *obj, char **tetrimino);
 void		delete_list(t_tetris **root);
 void		aff_tetrimino(char **tetrimino);
 int		create_others_forms(t_tetris *list, t_obj *obj);
+void		aff_map(char **map);
+void		ini_pos(t_start_pos *pos, t_obj *obj);
+int		check_moove(char **map, t_tetris *it, t_start_pos *pos);
+void		clear_tetrimino(char **map, t_start_pos *pos, t_obj *obj);
+void		moove_tetrimino(char **map, t_tetris *list,
+				t_events *ev, int turn);
+void		ini_events(t_events *ev, t_tetris *list);
 
 #endif /* !TETRIS_H_ */

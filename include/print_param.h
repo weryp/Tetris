@@ -5,13 +5,15 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Feb 29 15:54:56 2016 Paul Wery
-** Last update Mon Feb 29 18:39:20 2016 victor hoarau
+** Last update Wed Mar  2 00:26:51 2016 Paul Wery
 */
 
 #ifndef PARAM_H_
 # define PARAM_H_
 
 # define MAX_SCORE_SIZE (12)
+
+#include "tetris.h"
 
 typedef	struct	s_pos
 {
@@ -21,7 +23,7 @@ typedef	struct	s_pos
 
 typedef	struct	s_scorebox
 {
-  int		level
+  int		level;
   int		player_score;
   int		best_score;
   int		time;
@@ -37,7 +39,7 @@ typedef	struct	s_title
 
 typedef	struct	s_nextbox
 {
-  t_obj		obj;
+  struct s_obj	*obj;
   t_pos		pos;
   t_pos		size;
 }		t_nextbox;
