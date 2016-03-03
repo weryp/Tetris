@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Thu Mar  3 00:32:25 2016 Paul Wery
+** Last update Thu Mar  3 03:57:52 2016 Paul Wery
 */
 
 #ifndef TETRIS_H_
@@ -59,8 +59,11 @@ typedef struct	s_events
   int		key;
   int		form;
   int		nb_tet;
-  int		tet_clear;
+  int		tet_start;
   int		tetrimino;
+  int		time_start;
+  int		time_end;
+  int		height_time;
 }		t_events;
 
 typedef struct	s_score
@@ -89,5 +92,8 @@ void		clear_tetrimino(char **map, t_start_pos *pos, t_obj *obj);
 void		moove_tetrimino(char **map, t_tetris *list,
 				t_events *ev, int turn);
 void		ini_events(t_events *ev, t_tetris *list);
+int		moove_tetrimino_next(char **map, t_events *ev,
+				     t_tetris *list);
+int		change_form(char **map, t_tetris *it, t_start_pos *pos);
 
 #endif /* !TETRIS_H_ */

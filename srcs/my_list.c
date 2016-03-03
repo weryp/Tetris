@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Feb 29 20:51:07 2016 Paul Wery
-** Last update Thu Mar  3 00:33:16 2016 Paul Wery
+** Last update Thu Mar  3 02:09:25 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -68,7 +68,7 @@ int		add_elem_next(t_tetris *elem, char *name, t_obj *obj)
   new_elem->prev = elem;
   elem->next->prev = new_elem;
   elem->next = new_elem;
-  new_elem->next_form = elem;
+  new_elem->next_form = new_elem;
   return (0);
 }
 

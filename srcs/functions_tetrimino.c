@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Mar  2 21:17:56 2016 Paul Wery
-** Last update Thu Mar  3 01:14:38 2016 Paul Wery
+** Last update Thu Mar  3 03:12:58 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -50,8 +50,13 @@ int	check_moove(char **map, t_tetris *it, t_start_pos *pos)
       i = 0;
       x = pos->start_x;
       while (x < pos->end_x)
-        if (map[y][x++] == '*' && it->obj.tetrimino[n][i++] == '*')
-          return (-1);
+	{
+	  if ((map[y][x] == '*' && it->obj.tetrimino[n][i] == '*')
+	      || map[y][x] == '-')
+	    return (-1);
+	  x += 1;
+	  i += 1;
+	}
       n += 1;
       y += 1;
     }
@@ -76,8 +81,11 @@ void	ini_events(t_events *ev, t_tetris *list)
       ev->it = ev->it->next;
 
     }
-  ev->tet_clear = 0;
+  ev->tet_start = 0;
   ev->tetrimino = 0;
   ev->form = 0;
   ev->key = 0;
+  ev->time_start = 0;
+  ev->time_end = 0;
+  ev->height_time = 0;
 }
