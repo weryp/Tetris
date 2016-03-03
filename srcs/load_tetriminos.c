@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Feb 29 21:13:21 2016 Paul Wery
-** Last update Wed Mar  2 03:48:42 2016 Paul Wery
+** Last update Fri Mar  4 00:48:36 2016 Paul Wery
 */
 
 #include <sys/types.h>
@@ -57,7 +57,7 @@ int	load_tetrimino(t_dir *file, t_tetris *list)
 
   buffer = NULL;
   file_name = NULL;
-  if (file->d_name[0] == '.')
+  if (file->d_name[0] == '.' || check_ext(file->d_name) == -1)
     return (0);
   if ((file_name = my_path(file->d_name, "tetriminos/")) == NULL)
     return (-1);

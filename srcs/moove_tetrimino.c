@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Mar  2 16:40:24 2016 Paul Wery
-** Last update Thu Mar  3 03:56:17 2016 Paul Wery
+** Last update Fri Mar  4 00:46:33 2016 Paul Wery
 */
 
 #define _POSIX_SOURCE
@@ -38,7 +38,8 @@ int	change_form(char **map, t_tetris *it, t_start_pos *pos)
       n += 1;
       y += 1;
     }
-  aff_map(map);
+  clear_map(map);
+  aff_map_color(map, it, pos);
   return (0);
 }
 
@@ -70,25 +71,12 @@ void		event_tetrimino_next(char **map, t_events *ev,
 {
   t_start_pos	pos;
 
-  while (ev->pos.start_x < 1)
-    {
-      ev->pos.start_x += 1;
-      ev->pos.end_x += 1;
-    }
-  while ((ev->pos.end_x) > 10)
-    {
-      ev->pos.start_x -= 1;
-      ev->pos.end_x -= 1;
-    }
-  while (ev->pos.start_y < 1)
-    {
-      ev->pos.start_y += 1;
-      ev->pos.end_y += 1;
-    }
+  check_border(&ev->pos);
   pos.start_x = ev->pos.start_x;
   pos.start_y = ev->pos.start_y + ev->height_time;
   pos.end_x = ev->pos.end_x;
   pos.end_y = ev->pos.end_y + ev->height_time;
+  check_border(&pos);
   change_form(map, ev->it, &pos);
   clear_tetrimino(map, &pos, &ev->it->obj);
   ev->tet_start = 1;
@@ -99,7 +87,7 @@ void	event_tetrimino(char **map, t_events *ev,
 			t_tetris *list)
 {
   clear_tetrimino(map, &ev->pos, &ev->it->obj);
-  if (ev->key == KEY_UP)
+  if (ev->key == KEY_UP && check_change_form(ev, map) == 0)
     {
       ev->form += 1;
       if (ev->form == 4)
@@ -111,12 +99,12 @@ void	event_tetrimino(char **map, t_events *ev,
   if (ev->key == KEY_LEFT || ev->key == KEY_RIGHT)
     {
       clear_tetrimino(map, &ev->pos, &ev->it->obj);
-      if (ev->key == KEY_LEFT)
+      if (ev->key == KEY_LEFT && check_side_left(ev, map) == 0)
 	{
 	  ev->pos.start_x -= 1;
 	  ev->pos.end_x -= 1;
 	}
-      if (ev->key == KEY_RIGHT)
+      if (ev->key == KEY_RIGHT && check_side_right(ev, map) == 0)
 	{
 	  ev->pos.start_x += 1;
 	  ev->pos.end_x += 1;
@@ -125,7 +113,7 @@ void	event_tetrimino(char **map, t_events *ev,
   event_tetrimino_next(map, ev, list);
 }
 
-void		moove_tetrimino(char **map, t_tetris *list,
+int		moove_tetrimino(char **map, t_tetris *list,
 				t_events *ev, int turn)
 {
   ev->it = list->next;
@@ -145,6 +133,7 @@ void		moove_tetrimino(char **map, t_tetris *list,
   if (ev->tet_start == 0)
     ini_pos(&ev->pos, &ev->it->obj);
   if (moove_tetrimino_next(map, ev, list) == -1)
-    return;
+    return (0);
   event_tetrimino(map, ev, list);
+  return (0);
 }

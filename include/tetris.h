@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Thu Mar  3 03:57:52 2016 Paul Wery
+** Last update Fri Mar  4 00:55:10 2016 Paul Wery
 */
 
 #ifndef TETRIS_H_
@@ -89,11 +89,20 @@ void		aff_map(char **map);
 void		ini_pos(t_start_pos *pos, t_obj *obj);
 int		check_moove(char **map, t_tetris *it, t_start_pos *pos);
 void		clear_tetrimino(char **map, t_start_pos *pos, t_obj *obj);
-void		moove_tetrimino(char **map, t_tetris *list,
+int		moove_tetrimino(char **map, t_tetris *list,
 				t_events *ev, int turn);
 void		ini_events(t_events *ev, t_tetris *list);
 int		moove_tetrimino_next(char **map, t_events *ev,
 				     t_tetris *list);
 int		change_form(char **map, t_tetris *it, t_start_pos *pos);
+int		error_size(void);
+void		ini_colors(void);
+void		aff_map_color(char **map, t_tetris *it, t_start_pos *pos);
+void		check_border(t_start_pos *pos);
+int		check_change_form(t_events *ev, char **map);
+int		check_side_left(t_events *ev, char **map);
+int		check_side_right(t_events *ev, char **map);
+void		clear_map(char **map);
+int		check_ext(char *file);
 
 #endif /* !TETRIS_H_ */

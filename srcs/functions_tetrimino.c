@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Mar  2 21:17:56 2016 Paul Wery
-** Last update Thu Mar  3 03:12:58 2016 Paul Wery
+** Last update Thu Mar  3 16:31:09 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -73,7 +73,7 @@ void	ini_pos(t_start_pos *pos, t_obj *obj)
 
 void	ini_events(t_events *ev, t_tetris *list)
 {
-  ev->nb_tet = 0;
+  ev->nb_tet = 1;
   ev->it = list->next;
   while (ev->it->next != list)
     {

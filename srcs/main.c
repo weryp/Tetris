@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 07:09:19 2016 Paul Wery
-** Last update Thu Mar  3 01:02:51 2016 Paul Wery
+** Last update Fri Mar  4 00:42:46 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -13,24 +13,13 @@
 #include <unistd.h>
 #include "tetris.h"
 
-int	error_size()
-{
-  if (LINES < 20 || COLS < 44)
-    {
-      mvprintw(LINES / 2, COLS / 2 - 7, "size too small");
-      halfdelay(30);
-      getch();
-      return (-1);
-    }
-  return (0);
-}
-
 void	aff_map(char **map)
 {
   int	n;
   int	i;
 
   n = 0;
+  attron(COLOR_PAIR(6));
   while (map[n] != NULL)
     {
       i = 0;
@@ -41,6 +30,7 @@ void	aff_map(char **map)
 	}
       n += 1;
     }
+  attroff(COLOR_PAIR(6));
 }
 
 char	**create_aff_map(int n, int i)
@@ -82,30 +72,38 @@ char	**ini_tetris(const char *file)
   return (map);
 }
 
+void		start_ncurses(t_tetris *tet, WINDOW *new_win)
+{
+  t_events	ev;
+  char		**map;
+
+  ini_events(&ev, tet);
+  if ((map = ini_tetris((const char*)new_win)) != NULL)
+    while (ev.key != 27)
+      {
+	refresh();
+	nodelay(new_win, TRUE);
+	ev.key = getch();
+	moove_tetrimino(map, tet, &ev, 1);
+      }
+}
+
 int		main()
 {
   WINDOW	*new_win;
-  char		**map;
   t_tetris	*tet;
-  t_events	ev;
 
   new_win = initscr();
+  noecho();
   keypad(new_win, TRUE);
   curs_set(0);
+  start_color();
+  ini_colors();
   if ((tet = create_list()) == NULL)
     return (0);
   if (load_tetriminos(tet) == 0)
-    {
-      ini_events(&ev, tet);
-      if ((map = ini_tetris((const char*)new_win)) != NULL)
-	while (ev.key != 27)
-	  {
-	    refresh();
-	    nodelay(new_win, TRUE);
-	    ev.key = getch();
-	    moove_tetrimino(map, tet, &ev, 1);
-	  }
-    }
+    start_ncurses(tet, new_win);
+  echo();
   endwin();
   return (0);
 }

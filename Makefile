@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sun Feb 28 06:27:14 2016 Paul Wery
-## Last update Thu Mar  3 03:57:22 2016 Paul Wery
+## Last update Fri Mar  4 00:54:57 2016 Paul Wery
 ##
 
 NAME	=	tetris
@@ -26,7 +26,11 @@ SRCS	=	srcs/main.c \
 		srcs/create_form_tetriminos.c \
 		srcs/functions_tetrimino.c \
 		srcs/moove_tetrimino.c \
-		srcs/moove_tetrimino_next.c
+		srcs/moove_tetrimino_next.c \
+		srcs/errors_functions.c \
+		srcs/ini_colors.c \
+		srcs/check_change_form.c \
+		srcs/check_ext.c
 
 all	:	$(NAME)
 
