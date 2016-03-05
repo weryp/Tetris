@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Fri Mar  4 00:55:10 2016 Paul Wery
+** Last update Sat Mar  5 22:43:05 2016 hoarau
 */
 
 #ifndef TETRIS_H_
@@ -20,6 +20,7 @@
 # define UNUSED __attribute__((unused))
 
 # include <sys/stat.h>
+# include <curses.h>
 # include "print_param.h"
 
 typedef struct dirent t_dir;
