@@ -5,10 +5,9 @@
 ** Login   <hoarau_v@epitech.net>
 **
 ** Started on  Sat Mar  5 20:11:47 2016 hoarau
-** Last update Sun Mar  6 02:29:51 2016 Paul Wery
+** Last update Sun Mar  6 02:39:33 2016 Paul Wery
 */
 
-# include <curses.h>
 # include "print_param.h"
 
 t_pos	update_term_size(WINDOW *term)

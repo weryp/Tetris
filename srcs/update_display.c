@@ -5,7 +5,7 @@
 ** Login   <hoarau_v@epitech.net>
 **
 ** Started on  Mon Feb 29 16:17:42 2016 victor hoarau
-** Last update Sun Mar  6 02:30:14 2016 Paul Wery
+** Last update Sun Mar  6 02:41:21 2016 Paul Wery
 */
 
 # include <curses.h>
@@ -38,8 +38,6 @@ void	print_scorebox(t_scorebox *scorebox)
   textpos.y += 2;
   my_putnbr_pos_max(scorebox->time, textpos, scorebox->size);
 }
-
-void	print_
 
 int	update_display_game(t_display_game_param *param)
 {
