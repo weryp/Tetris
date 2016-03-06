@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Mar  2 21:17:56 2016 Paul Wery
-** Last update Thu Mar  3 16:31:09 2016 Paul Wery
+** Last update Sun Mar  6 02:12:33 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -63,12 +63,12 @@ int	check_moove(char **map, t_tetris *it, t_start_pos *pos)
   return (0);
 }
 
-void	ini_pos(t_start_pos *pos, t_obj *obj)
+void	ini_pos(t_start_pos *pos, t_events *ev)
 {
-  pos->start_x = 5;
-  pos->end_x = pos->start_x + obj->width;
+  pos->start_x = (ev->cols / 2) - (ev->it->obj.width / 2);
+  pos->end_x = pos->start_x + ev->it->obj.width;
   pos->start_y = 1;
-  pos->end_y = pos->start_y + obj->height;
+  pos->end_y = pos->start_y + ev->it->obj.height;
 }
 
 void	ini_events(t_events *ev, t_tetris *list)
@@ -85,7 +85,6 @@ void	ini_events(t_events *ev, t_tetris *list)
   ev->tetrimino = 0;
   ev->form = 0;
   ev->key = 0;
-  ev->time_start = 0;
   ev->time_end = 0;
   ev->height_time = 0;
 }

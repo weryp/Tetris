@@ -5,9 +5,10 @@
 ** Login   <hoarau_v@epitech.net>
 **
 ** Started on  Mon Feb 29 18:40:00 2016 victor hoarau
-** Last update Wed Mar  2 12:54:42 2016 Paul Wery
+** Last update Sun Mar  6 02:27:45 2016 Paul Wery
 */
 
+# include <curses.h>
 # include "tetris.h"
 
 void	my_putchar_pos(char c, t_pos pos)

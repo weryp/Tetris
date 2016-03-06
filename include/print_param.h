@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Feb 29 15:54:56 2016 Paul Wery
-** Last update Sat Mar  5 22:37:29 2016 hoarau
+** Last update Sun Mar  6 02:26:48 2016 Paul Wery
 */
 
 #ifndef PARAM_H_
@@ -23,7 +23,8 @@
 # define NEXTBOX_POSX(data) (data->term_size.x - data->nextbox.size.x)
 # define NEXTBOX_POSY(data) (0)
 
-#include "tetris.h"
+# include <curses.h>
+# include "tetris.h"
 
 typedef	struct	s_pos
 {

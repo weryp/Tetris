@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sun Feb 28 06:27:14 2016 Paul Wery
-## Last update Fri Mar  4 00:54:57 2016 Paul Wery
+## Last update Sat Mar  5 22:45:52 2016 Paul Wery
 ##
 
 NAME	=	tetris
@@ -30,7 +30,13 @@ SRCS	=	srcs/main.c \
 		srcs/errors_functions.c \
 		srcs/ini_colors.c \
 		srcs/check_change_form.c \
-		srcs/check_ext.c
+		srcs/check_ext.c \
+		srcs/clean_line.c \
+		srcs/end_game.c \
+		srcs/params_one.c \
+		srcs/params_two.c \
+		srcs/ini_game.c \
+		srcs/return_fonc.c
 
 all	:	$(NAME)
 

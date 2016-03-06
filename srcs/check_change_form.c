@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar  3 22:21:53 2016 Paul Wery
-** Last update Fri Mar  4 00:16:54 2016 Paul Wery
+** Last update Sun Mar  6 02:04:24 2016 Paul Wery
 */
 
 #include "tetris.h"
@@ -40,7 +40,7 @@ int	check_side_right(t_events *ev, char **map)
 {
   t_start_pos	pos;
 
-  if (ev->pos.end_x == 11)
+  if (ev->pos.end_x == (ev->cols + 1))
     return (-1);
   pos.start_x = ev->pos.start_x + 1;
   pos.end_x = ev->pos.end_x + 1;

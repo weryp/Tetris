@@ -1,13 +1,14 @@
 /*
 ** print_all.c for print_all in /home/hoarau/Code/PSU/PSU_2015_tetris
-** 
+**
 ** Made by hoarau
 ** Login   <hoarau_v@epitech.net>
-** 
+**
 ** Started on  Sat Mar  5 20:11:47 2016 hoarau
-** Last update Sat Mar  5 22:38:49 2016 hoarau
+** Last update Sun Mar  6 02:29:51 2016 Paul Wery
 */
 
+# include <curses.h>
 # include "print_param.h"
 
 t_pos	update_term_size(WINDOW *term)

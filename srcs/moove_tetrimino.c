@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Mar  2 16:40:24 2016 Paul Wery
-** Last update Fri Mar  4 00:46:33 2016 Paul Wery
+** Last update Sun Mar  6 02:11:17 2016 Paul Wery
 */
 
 #define _POSIX_SOURCE
@@ -15,7 +15,8 @@
 #include <unistd.h>
 #include "tetris.h"
 
-int	change_form(char **map, t_tetris *it, t_start_pos *pos)
+int	change_form(char **map, t_tetris *it,
+		    t_start_pos *pos, t_events *ev)
 {
   int	x;
   int	y;
@@ -38,29 +39,35 @@ int	change_form(char **map, t_tetris *it, t_start_pos *pos)
       n += 1;
       y += 1;
     }
-  clear_map(map);
-  aff_map_color(map, it, pos);
+  clear_map(map, ev);
+  aff_map_color(map, it, pos, ev);
   return (0);
 }
 
-void		time_event(char **map, t_events *ev,
-			   t_start_pos pos, t_tetris *list)
+void	time_event(char **map, t_events *ev,
+		   t_start_pos pos, t_tetris *list)
 {
+  int	my_time;
+
   ev->time_end += 1;
   usleep(1);
-  if (ev->time_end == 5000)
+  my_time = 5000 - (((int)ev->level - 1) * 200);
+  if (my_time < 0 || my_time == 0)
+    my_time = 1;
+  if (ev->time_end == my_time)
     {
       ev->height_time += 1;
       if (check_moove(map, ev->it, &pos) == 0)
 	{
 	  pos.start_y += 1;
 	  pos.end_y += 1;
-	  change_form(map, ev->it, &pos);
+	  change_form(map, ev->it, &pos, ev);
 	}
       else
 	{
-	  change_form(map, ev->it, &pos);
+	  change_form(map, ev->it, &pos, ev);
 	  ini_events(ev, list);
+	  clean_line(map, ev);
 	}
       ev->time_end = 0;
     }
@@ -71,13 +78,13 @@ void		event_tetrimino_next(char **map, t_events *ev,
 {
   t_start_pos	pos;
 
-  check_border(&ev->pos);
+  check_border(&ev->pos, ev);
   pos.start_x = ev->pos.start_x;
   pos.start_y = ev->pos.start_y + ev->height_time;
   pos.end_x = ev->pos.end_x;
   pos.end_y = ev->pos.end_y + ev->height_time;
-  check_border(&pos);
-  change_form(map, ev->it, &pos);
+  check_border(&pos, ev);
+  change_form(map, ev->it, &pos, ev);
   clear_tetrimino(map, &pos, &ev->it->obj);
   ev->tet_start = 1;
   time_event(map, ev, pos, list);
@@ -87,7 +94,7 @@ void	event_tetrimino(char **map, t_events *ev,
 			t_tetris *list)
 {
   clear_tetrimino(map, &ev->pos, &ev->it->obj);
-  if (ev->key == KEY_UP && check_change_form(ev, map) == 0)
+  if (ev->key == ev->key_turn && check_change_form(ev, map) == 0)
     {
       ev->form += 1;
       if (ev->form == 4)
@@ -96,15 +103,15 @@ void	event_tetrimino(char **map, t_events *ev,
       ev->pos.end_x = ev->pos.start_x + ev->it->obj.width;
       ev->pos.end_y = ev->pos.start_y + ev->it->obj.height;
     }
-  if (ev->key == KEY_LEFT || ev->key == KEY_RIGHT)
+  if (ev->key == ev->key_left || ev->key == ev->key_right)
     {
       clear_tetrimino(map, &ev->pos, &ev->it->obj);
-      if (ev->key == KEY_LEFT && check_side_left(ev, map) == 0)
+      if (ev->key == ev->key_left && check_side_left(ev, map) == 0)
 	{
 	  ev->pos.start_x -= 1;
 	  ev->pos.end_x -= 1;
 	}
-      if (ev->key == KEY_RIGHT && check_side_right(ev, map) == 0)
+      if (ev->key == ev->key_right && check_side_right(ev, map) == 0)
 	{
 	  ev->pos.start_x += 1;
 	  ev->pos.end_x += 1;
@@ -131,7 +138,11 @@ int		moove_tetrimino(char **map, t_tetris *list,
       ev->it = ev->it->next_form;
     }
   if (ev->tet_start == 0)
-    ini_pos(&ev->pos, &ev->it->obj);
+    {
+      ini_pos(&ev->pos, ev);
+      if (end_game(map, &ev->pos, &ev->it->obj) == -1)
+	return (-1);
+    }
   if (moove_tetrimino_next(map, ev, list) == -1)
     return (0);
   event_tetrimino(map, ev, list);

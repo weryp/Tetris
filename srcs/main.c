@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 07:09:19 2016 Paul Wery
-** Last update Fri Mar  4 00:42:46 2016 Paul Wery
+** Last update Sun Mar  6 01:55:01 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -13,7 +13,7 @@
 #include <unistd.h>
 #include "tetris.h"
 
-void	aff_map(char **map)
+void	aff_map(char **map, t_events *ev)
 {
   int	n;
   int	i;
@@ -25,7 +25,9 @@ void	aff_map(char **map)
       i = 0;
       while (map[n][i] != '\0')
 	{
-	  mvprintw((LINES / 2) - 11  + n, (COLS / 2) + 2 + i, &map[n][i]);
+	  mvprintw((LINES / 2) - (ev->lines / 2 + 1) + n,
+		   (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
+		   + i, &map[n][i]);
 	  i += 1;
 	}
       n += 1;
@@ -33,22 +35,22 @@ void	aff_map(char **map)
   attroff(COLOR_PAIR(6));
 }
 
-char	**create_aff_map(int n, int i)
+char	**create_aff_map(int n, int i, t_events *ev)
 {
   char	**map;
 
-  if ((map = malloc(23 * sizeof(char*))) == NULL)
+  if ((map = malloc((ev->lines + 3) * sizeof(char*))) == NULL)
     return (NULL);
-  while (n < 22)
+  while (n < (ev->lines + 2))
     {
       i = 0;
-      if ((map[n] = malloc(13)) == NULL)
+      if ((map[n] = malloc(ev->cols + 3)) == NULL)
 	return (NULL);
-      while (i < 12)
+      while (i < (ev->cols + 2))
 	{
-	  if (n == 0 || n == 21)
+	  if (n == 0 || n == (ev->lines + 1))
 	    map[n][i++] = '-';
-	  else if (i == 0 || i == 11)
+	  else if (i == 0 || i == (ev->cols + 1))
 	    map[n][i++] = '|';
 	  else
 	    map[n][i++] = ' ';
@@ -59,36 +61,44 @@ char	**create_aff_map(int n, int i)
   return (map);
 }
 
-char	**ini_tetris(const char *file)
+char	**ini_tetris(const char *file, t_events *ev)
 {
   char	**map;
 
   newterm(file, stderr, stdin);
-  if ((map = create_aff_map(0, 0)) == NULL)
+  if ((map = create_aff_map(0, 0, ev)) == NULL)
     return (NULL);
-  if (error_size() == -1)
+  if (error_size(ev) == -1)
     return (NULL);
-  aff_map(map);
+  aff_map(map, ev);
   return (map);
 }
 
-void		start_ncurses(t_tetris *tet, WINDOW *new_win)
+void		start_ncurses(t_tetris *tet, WINDOW *new_win,
+			      int ac, char **av)
 {
   t_events	ev;
   char		**map;
+  int		end;
 
+  end = 0;
   ini_events(&ev, tet);
-  if ((map = ini_tetris((const char*)new_win)) != NULL)
-    while (ev.key != 27)
+  ini_game(&ev);
+  if (ac > 1)
+    load_params_tetris(&ev, av);
+  if ((map = ini_tetris((const char*)new_win, &ev)) != NULL)
+    while (ev.key != ev.key_quit)
       {
 	refresh();
 	nodelay(new_win, TRUE);
 	ev.key = getch();
-	moove_tetrimino(map, tet, &ev, 1);
+	if (end == 0)
+	  if ((end = moove_tetrimino(map, tet, &ev, 1)) == -1)
+	    end_message(map, &ev);
       }
 }
 
-int		main()
+int		main(int ac, char **av)
 {
   WINDOW	*new_win;
   t_tetris	*tet;
@@ -102,7 +112,7 @@ int		main()
   if ((tet = create_list()) == NULL)
     return (0);
   if (load_tetriminos(tet) == 0)
-    start_ncurses(tet, new_win);
+    start_ncurses(tet, new_win, ac, av);
   echo();
   endwin();
   return (0);
