@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sun Feb 28 06:27:14 2016 Paul Wery
-## Last update Sat Mar  5 22:45:52 2016 Paul Wery
+## Last update Sun Mar  6 02:48:30 2016 Paul Wery
 ##
 
 NAME	=	tetris
@@ -18,25 +18,25 @@ CFLAGS	=	-W -Wall -Werror -ansi -pedantic -Iinclude
 
 OBJS	=	$(SRCS:.c=.o)
 
-SRCS	=	srcs/main.c \
-		srcs/load_tetriminos.c \
-		srcs/load_objs.c \
-		srcs/my_list.c \
-		srcs/usefull_functions.c \
-		srcs/create_form_tetriminos.c \
-		srcs/functions_tetrimino.c \
-		srcs/moove_tetrimino.c \
-		srcs/moove_tetrimino_next.c \
-		srcs/errors_functions.c \
-		srcs/ini_colors.c \
-		srcs/check_change_form.c \
-		srcs/check_ext.c \
-		srcs/clean_line.c \
-		srcs/end_game.c \
-		srcs/params_one.c \
-		srcs/params_two.c \
-		srcs/ini_game.c \
-		srcs/return_fonc.c
+SRCS	=	srcs/game/main.c \
+		srcs/game/load_tetriminos.c \
+		srcs/game/load_objs.c \
+		srcs/game/my_list.c \
+		srcs/game/usefull_functions.c \
+		srcs/game/create_form_tetriminos.c \
+		srcs/game/functions_tetrimino.c \
+		srcs/game/moove_tetrimino.c \
+		srcs/game/moove_tetrimino_next.c \
+		srcs/game/errors_functions.c \
+		srcs/game/ini_colors.c \
+		srcs/game/check_change_form.c \
+		srcs/game/check_ext.c \
+		srcs/game/clean_line.c \
+		srcs/game/end_game.c \
+		srcs/game/params_one.c \
+		srcs/game/params_two.c \
+		srcs/game/ini_game.c \
+		srcs/game/return_fonc.c
 
 all	:	$(NAME)
 
