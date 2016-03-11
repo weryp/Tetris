@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Fri Mar 11 02:40:53 2016 Paul Wery
+** Last update Fri Mar 11 17:16:36 2016 Paul Wery
 */
 
 #ifndef TETRIS_H_
@@ -114,7 +114,7 @@ int		moove_tetrimino_next(char **map, t_events *ev,
 				     t_tetris *list);
 int		change_form(char **map, t_tetris *it,
 			    t_start_pos *pos, t_events *ev);
-int		error_size(t_events *ev);
+int		error_size(t_events *ev, SCREEN *scr);
 void		ini_colors(void);
 void		aff_map_color(char **map, t_tetris *it,
 			      t_start_pos *pos, t_events *ev);
@@ -157,5 +157,6 @@ void		debug_tetrimino(t_tetris *elem);
 char		*my_path(char *file, char *tet);
 void		my_putchar(char c);
 void		my_putnbr(int nb);
+void		str_debug(char *str);
 
 #endif /* !TETRIS_H_ */

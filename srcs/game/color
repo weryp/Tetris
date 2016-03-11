@@ -18,17 +18,19 @@ check_change_form.c:  pos.end_y = ev->pos.start_y + it->obj.height + ev->height_
 clean_line.c:	  mvprintw((LINES / 2) - (ev->lines / 2 + 1) + n,
 clean_line.c:                   (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
 clean_line.c:  ev->level += 0.1;
+debug.c:  if (ev->hide_tet == 0)
 debug.c:  my_putnbr(ev->level);
 debug.c:  my_putnbr(ev->lines);
 debug.c:  my_putnbr(ev->cols);
-debug.c:  write(1, &ev->key_left, 1);
-debug.c:  write(1, &ev->key_right, 1);
-debug.c:  write(1, &ev->key_turn, 1);
-debug.c:  write(1, &ev->key_drop, 1);
-debug.c:  write(1, &ev->key_quit, 1);
-debug.c:  write(1, &ev->key_pause, 1);
+debug.c:  if (ev->debug == 1)
+debug.c:      str_debug(ev->key_left);
+debug.c:      str_debug(ev->key_right);
+debug.c:      str_debug(ev->key_turn);
+debug.c:      str_debug(ev->key_drop);
+debug.c:      str_debug(ev->key_quit);
+debug.c:      str_debug(ev->key_pause);
+debug_next.c:  elem->prev->next = elem->next;
 debug_next.c:  elem_one->prev->next = elem_two;
-debug_next.c:  elem_two->prev->next = elem_one;
 end_game.c:	  mvprintw((LINES / 2) - (ev->lines / 2 + 1) + n,
 end_game.c:                   (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
 end_game.c:  mvprintw((LINES / 2), (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
@@ -45,7 +47,7 @@ functions_tetrimino.c:      ev->it = ev->it->next;
 functions_tetrimino.c:  ev->tet_start = 0;
 functions_tetrimino.c:  ev->tetrimino = 0;
 functions_tetrimino.c:  ev->form = 0;
-functions_tetrimino.c:  ev->key = 0;
+functions_tetrimino.c:  ev->key[0] = '\0';
 functions_tetrimino.c:  ev->time_end = 0;
 functions_tetrimino.c:  ev->height_time = 0;
 ini_colors.c:	    mvprintw((LINES / 2) - (ev->lines / 2 + 1) + n,
@@ -54,12 +56,12 @@ ini_colors.c:	    mvprintw((LINES / 2) - (ev->lines / 2 + 1) + y,
 ini_colors.c:		     (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
 ini_game.c:  ev->debug = 1;
 ini_game.c:  ev->level = 1;
-ini_game.c:  ev->key_left = num->kl;
-ini_game.c:  ev->key_right = num->kr;
-ini_game.c:  ev->key_turn = num->ku;
-ini_game.c:  ev->key_drop = num->kd;
-ini_game.c:  ev->key_quit = 'q';
-ini_game.c:  ev->key_pause = 32;
+ini_game.c:  copstr(ev->key_left, num->kl, 0);
+ini_game.c:  copstr(ev->key_right, num->kr, 0);
+ini_game.c:  copstr(ev->key_turn, num->ku, 0);
+ini_game.c:  copstr(ev->key_drop, num->kd, 0);
+ini_game.c:  copstr(ev->key_quit, "q", 0);
+ini_game.c:  copstr(ev->key_pause, " ", 0);
 ini_game.c:  ev->lines = 20;
 ini_game.c:  ev->cols = 10;
 ini_game.c:  ev->hide_tet = 0;
@@ -72,6 +74,10 @@ main.c:      if ((map[n] = malloc(ev->cols + 3)) == NULL)
 main.c:      while (i < (ev->cols + 2))
 main.c:	  if (n == 0 || n == (ev->lines + 1))
 main.c:	  else if (i == 0 || i == (ev->cols + 1))
+main.c:  copstr(ev->key, "\0", 0);
+main.c:    while (cstr(ev->key, ev->key_quit) == 0)
+main.c:	copstr(ev->key, "\0", 0);
+main.c:	if (read(0, ev->key, 4) == -1)
 moove_tetrimino.c:  ev->time_end += 1;
 moove_tetrimino.c:  my_time = 5000 - (((int)ev->level - 1) * 200);
 moove_tetrimino.c:  if (ev->time_end == my_time)
@@ -114,31 +120,32 @@ moove_tetrimino.c:      ev->it = ev->it->next_form;
 moove_tetrimino.c:  if (ev->tet_start == 0)
 moove_tetrimino.c:      ini_pos(&ev->pos, ev);
 moove_tetrimino.c:      if (end_game(map, &ev->pos, &ev->it->obj) == -1)
-moove_tetrimino_next.c:  if (ev->key == ev->key_pause)
-moove_tetrimino_next.c:      ev->key = 0;
-moove_tetrimino_next.c:      while (ev->key != ev->key_pause)
-moove_tetrimino_next.c:	  ev->key = getch();
-moove_tetrimino_next.c:	  if (ev->key == ev->key_quit)
+moove_tetrimino_next.c:  if (cstr(ev->key, ev->key_pause) == 1)
+moove_tetrimino_next.c:      ev->key[0] = '\0';
+moove_tetrimino_next.c:      while (cstr(ev->key, ev->key_pause) == 0)
+moove_tetrimino_next.c:	  copstr(ev->key, "\0", 0);
+moove_tetrimino_next.c:	  if (read(0, ev->key, 4) == -1)
+moove_tetrimino_next.c:	  if (cstr(ev->key, ev->key_quit) == 1 || ret == -1)
 moove_tetrimino_next.c:  while (pos->end_x > (ev->cols + 1))
 moove_tetrimino_next.c:  while (pos->end_y > (ev->lines + 1))
-moove_tetrimino_next.c:  if (ev->key == ev->key_drop)
+moove_tetrimino_next.c:  if (cstr(ev->key, ev->key_drop) == 1)
 moove_tetrimino_next.c:      while (check_moove(map, ev->it, &ev->pos) == 0)
 moove_tetrimino_next.c:          ev->pos.start_y += 1;
 moove_tetrimino_next.c:          ev->pos.end_y += 1;
 moove_tetrimino_next.c:      change_form(map, ev->it, &ev->pos, ev);
-params_one.c:    ev->key_drop = content[0];
-params_one.c:      ev->key_drop = param[n - 1];
-params_one.c:    ev->key_turn = content[0];
-params_one.c:      ev->key_turn = param[n - 1];
-params_one.c:    ev->key_right = content[0];
-params_one.c:      ev->key_right = param[n - 1];
-params_one.c:    ev->key_left = content[0];
-params_one.c:      ev->key_left = param[n - 1];
+params_one.c:    copstr(ev->key_drop, content, 0);
+params_one.c:      copstr(ev->key_drop, param, n);
+params_one.c:    copstr(ev->key_turn, content, 0);
+params_one.c:      copstr(ev->key_turn, param, n);
+params_one.c:    copstr(ev->key_right, content, 0);
+params_one.c:      copstr(ev->key_right, param, n);
+params_one.c:    copstr(ev->key_left, content, 0);
+params_one.c:      copstr(ev->key_left, param, n);
 params_one.c:  ev->level = ret;
-params_two.c:  ev->hide_tet = ret;
+params_two.c:  ev->hide_tet = 1;
 params_two.c:  ev->lines = ret_one;
 params_two.c:  ev->cols = ret_two;
-params_two.c:    ev->key_pause = content[0];
-params_two.c:      ev->key_pause = param[n - 1];
-params_two.c:    ev->key_quit = content[0];
-params_two.c:      ev->key_quit = param[n - 1];
+params_two.c:    copstr(ev->key_pause, content, 0);
+params_two.c:      copstr(ev->key_pause, param, n);
+params_two.c:    copstr(ev->key_quit, content, 0);
+params_two.c:      copstr(ev->key_quit, param, n);

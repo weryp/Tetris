@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Mar  6 18:10:04 2016 Paul Wery
-** Last update Fri Mar 11 02:20:56 2016 Paul Wery
+** Last update Fri Mar 11 10:57:16 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -23,8 +23,10 @@ void	my_putstr(char *str)
 
   n = 0;
   while (str[n] != '\0')
-    n += 1;
-  write(1, str, n);
+    {
+      my_putchar(str[n]);
+      n += 1;
+    }
 }
 
 

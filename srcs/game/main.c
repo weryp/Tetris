@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 07:09:19 2016 Paul Wery
-** Last update Thu Mar 10 00:04:29 2016 Paul Wery
+** Last update Fri Mar 11 17:19:06 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -65,9 +65,12 @@ char	**ini_tetris(t_events *ev)
 {
   char	**map;
 
+  noecho();
+  keypad(stdscr, TRUE);
+  curs_set(0);
+  start_color();
+  ini_colors();
   if ((map = create_aff_map(0, 0, ev)) == NULL)
-    return (NULL);
-  if (error_size(ev) == -1)
     return (NULL);
   aff_map(map, ev);
   return (map);
@@ -80,11 +83,6 @@ void		start_ncurses(t_tetris *tet, t_events *ev,
   int		end;
 
   end = 0;
-  noecho();
-  keypad(stdscr, TRUE);
-  curs_set(0);
-  start_color();
-  ini_colors();
   copstr(ev->key, "\0", 0);
   if ((map = ini_tetris(ev)) != NULL)
     while (cstr(ev->key, ev->key_quit) == 0)
@@ -120,10 +118,10 @@ int		main(int ac, char **av)
   ini_events(&ev, tet);
   ini_game(&ev, &num);
   load_params_tetris(&ev, av);
-  if (ev.debug == 1)
-    start_debug(&ev, tet);
+  start_debug(&ev, tet);
   if ((scr = newterm(NULL, stdout, stdin)) == NULL)
     return (0);
+  error_size(&ev, scr);
   if (ini_end_read(0) == -1)
     return (0);
   start_ncurses(tet, &ev, scr);

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Feb 29 23:29:59 2016 Paul Wery
-** Last update Mon Mar  7 15:13:12 2016 Paul Wery
+** Last update Fri Mar 11 17:05:50 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -53,7 +53,10 @@ int	load_obj(char *buffer, t_obj *obj)
   obj->height = nb;
   if ((nb = get_params(buffer, 3)) == -1)
     return (-1);
-  obj->color = nb;
+  if (nb < 1 || nb > 7)
+    obj->color = (rand() % 6) + 1;
+  else
+    obj->color = nb;
   obj->form = 1;
   obj->state = 0;
   return (0);

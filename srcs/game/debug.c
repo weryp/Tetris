@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Mar  7 02:18:09 2016 Paul Wery
-** Last update Fri Mar 11 02:35:05 2016 Paul Wery
+** Last update Fri Mar 11 12:43:46 2016 Paul Wery
 */
 
 #include <sys/ioctl.h>
@@ -52,7 +52,6 @@ void		debug_end(t_tetris *list, int n)
   my_putstr("Tetriminos : ");
   my_putnbr(n);
   my_putstr("\n");
-  put_in_order(list);
   while (it != list)
     {
       next = it->next;
@@ -96,26 +95,27 @@ void		debug_next(t_events *ev, t_tetris *list)
 
 void	start_debug(t_events *ev, t_tetris *list)
 {
+  put_in_order(list);
   if (ev->debug == 1)
     {
       my_putstr("*** DEBUG MODE ***\n");
       my_putstr("Key Left : ");
-      my_putstr(ev->key_left);
+      str_debug(ev->key_left);
       my_putstr("\n");
       my_putstr("Key Right : ");
-      my_putstr(ev->key_right);
+      str_debug(ev->key_right);
       my_putstr("\n");
       my_putstr("Key Turn : ");
-      my_putstr(ev->key_turn);
+      str_debug(ev->key_turn);
       my_putstr("\n");
       my_putstr("Key Drop : ");
-      my_putstr(ev->key_drop);
+      str_debug(ev->key_drop);
       my_putstr("\n");
       my_putstr("Key Quit : ");
-      my_putstr(ev->key_quit);
+      str_debug(ev->key_quit);
       my_putstr("\n");
       my_putstr("Key Pause : ");
-      my_putstr(ev->key_pause);
+      str_debug(ev->key_pause);
       my_putstr("\n");
       debug_next(ev, list);
     }

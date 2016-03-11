@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar 10 22:11:21 2016 Paul Wery
-** Last update Fri Mar 11 02:47:07 2016 Paul Wery
+** Last update Fri Mar 11 12:30:13 2016 Paul Wery
 */
 
 #include <sys/types.h>
@@ -124,7 +124,6 @@ void		debug_tetrimino(t_tetris *elem)
     return ;
   if ((buffer = alloc_buffer(fd, path)) == NULL)
     return ;
-
   if (check_tet(buffer, elem, 0, 0) == -1)
     {
       my_putstr("Error\n");

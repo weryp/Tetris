@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 04:48:27 2016 Paul Wery
-** Last update Wed Mar  9 15:26:19 2016 Paul Wery
+** Last update Fri Mar 11 12:26:51 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -39,21 +39,9 @@ int	get_nb(char *str, int param, int n)
   return (i);
 }
 
-int	hide_tet(t_events *ev, char *param, char *content)
+int	hide_tet(t_events *ev, char *param UNUSED, char *content UNUSED)
 {
-  int	n;
-  int	ret;
-
-  n = 0;
-  while (param[n] != '=' && param[n] != '\0')
-    n += 1;
-  if (param[n] == '\0' && content != NULL)
-    ret = get_nb(content, 1, 0);
-  else
-    ret = get_nb(param, 1, n + 1);
-  if (ret == -1)
-    return (-1);
-  ev->hide_tet = ret;
+  ev->hide_tet = 1;
   return (0);
 }
 
