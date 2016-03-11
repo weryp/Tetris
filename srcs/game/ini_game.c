@@ -5,14 +5,26 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 03:56:19 2016 Paul Wery
-** Last update Sun Mar  6 01:16:54 2016 Paul Wery
+** Last update Wed Mar  9 22:46:16 2016 Paul Wery
 */
 
-#include <curses.h>
 #include "tetris.h"
+#include <unistd.h>
 
-int	debug(t_events *ev UNUSED, char *param UNUSED, char *content UNUSED)
+void	ini_key(char *key)
 {
+  int	n;
+
+  while (n < 5)
+    {
+      key[n] = '\0';
+      n += 1;
+    }
+}
+
+int	debug(t_events *ev, char *param UNUSED, char *content UNUSED)
+{
+  ev->debug = 1;
   return (0);
 }
 
@@ -37,7 +49,7 @@ void	load_params_tetris(t_events *ev, char **av)
       params[6] = key_pause;
       params[7] = hide_tet;
       params[8] = debug;
-      params[9] = size_map;;
+      params[9] = size_map;
       params[10] = '\0';
       if (fonc != -1)
 	(*params[fonc])(ev, av[n], av[n + 1]);
@@ -45,16 +57,32 @@ void	load_params_tetris(t_events *ev, char **av)
     }
 }
 
-void	ini_game(t_events *ev)
+void	copstr(char *dest, char *src, int n)
+{
+  int	i;
+
+  i = 0;
+  while (src[n] != '\0' && i < 5)
+    {
+      dest[i] = src[n];
+      i += 1;
+      n += 1;
+    }
+  while (i < 5)
+    dest[i++] = '\0';
+}
+
+void	ini_game(t_events *ev, t_term_num *num)
 {
   ev->level = 1;
-  ev->key_left = KEY_LEFT;
-  ev->key_right = KEY_RIGHT;
-  ev->key_turn = KEY_UP;
-  ev->key_drop = KEY_DOWN;
-  ev->key_quit = 27;
-  ev->key_pause = 32;
+  copstr(ev->key_left, num->kl, 0);
+  copstr(ev->key_right, num->kr, 0);
+  copstr(ev->key_turn, num->ku, 0);
+  copstr(ev->key_drop, num->kd, 0);
+  copstr(ev->key_quit, "q", 0);
+  copstr(ev->key_pause, " ", 0);
   ev->lines = 20;
   ev->cols = 10;
   ev->hide_tet = 0;
+  ev->debug = 0;
 }

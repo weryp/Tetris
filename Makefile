@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sun Feb 28 06:27:14 2016 Paul Wery
-## Last update Sun Mar  6 02:48:30 2016 Paul Wery
+## Last update Thu Mar 10 23:39:22 2016 Paul Wery
 ##
 
 NAME	=	tetris
@@ -36,7 +36,14 @@ SRCS	=	srcs/game/main.c \
 		srcs/game/params_one.c \
 		srcs/game/params_two.c \
 		srcs/game/ini_game.c \
-		srcs/game/return_fonc.c
+		srcs/game/return_fonc.c \
+		srcs/game/help.c \
+		srcs/game/free_all.c \
+		srcs/game/ini_term.c \
+		srcs/game/ini_end_read.c \
+		srcs/game/debug.c \
+		srcs/game/debug_next.c \
+		srcs/game/debug_tetrimino.c
 
 all	:	$(NAME)
 

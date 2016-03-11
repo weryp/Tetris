@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Mar  2 16:40:24 2016 Paul Wery
-** Last update Wed Mar  9 05:10:09 2016 Paul Wery
+** Last update Wed Mar  9 05:09:46 2016 Paul Wery
 */
 
 #define _POSIX_SOURCE
@@ -54,7 +54,7 @@ void	time_event(char **map, t_events *ev,
   my_time = 5000 - (((int)ev->level - 1) * 200);
   if (my_time < 0 || my_time == 0)
     my_time = 1;
-  if (ev->time_end == my_time)
+  if (ev->time_end == 1/*my)
     {
       ev->height_time += 1;
       if (check_moove(map, ev->it, &pos) == 0)

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 04:06:36 2016 Paul Wery
-** Last update Sun Mar  6 00:58:55 2016 Paul Wery
+** Last update Wed Mar  9 15:26:07 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -14,26 +14,21 @@
 int	key_drop(t_events *ev, char *param, char *content)
 {
   int	n;
-  int	i;
 
   n = 0;
-  i = 0;
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
-  if (content != NULL && param[n] == '\0' && content[1] == '\0')
-    ev->key_drop = content[0];
+  if (content != NULL && param[n] == '\0')
+    copstr(ev->key_drop, content, 0);
   else if (param[n] != '\0')
     {
-      while (param[n] != '\0')
-	{
-	  n += 1;
-	  i += 1;
-	}
-      if (i != 2)
+      if (param[n] != '\0' && param[n + 1] != '\0')
+	n += 1;
+      else
 	return (-1);
-      ev->key_drop = param[n - 1];
+      copstr(ev->key_drop, param, n);
     }
-  else if (param[n] == '\0' && content != NULL && content[1] != '\0')
+  else if (param[n] == '\0' && content != NULL)
     return (-1);
   return (0);
 }
@@ -41,26 +36,21 @@ int	key_drop(t_events *ev, char *param, char *content)
 int	key_turn(t_events *ev, char *param, char *content)
 {
   int	n;
-  int	i;
 
   n = 0;
-  i = 0;
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
-  if (content != NULL && param[n] == '\0' && content[1] == '\0')
-    ev->key_turn = content[0];
+  if (content != NULL && param[n] == '\0')
+    copstr(ev->key_turn, content, 0);
   else if (param[n] != '\0')
     {
-      while (param[n] != '\0')
-	{
-	  n += 1;
-	  i += 1;
-	}
-      if (i != 2)
+      if (param[n] != '\0' && param[n + 1] != '\0')
+	n += 1;
+      else
 	return (-1);
-      ev->key_turn = param[n - 1];
+      copstr(ev->key_turn, param, n);
     }
-  else if (param[n] == '\0' && content != NULL && content[1] != '\0')
+  else if (param[n] == '\0' && content != NULL)
     return (-1);
   return (0);
 }
@@ -68,26 +58,21 @@ int	key_turn(t_events *ev, char *param, char *content)
 int	key_right(t_events *ev, char *param, char *content)
 {
   int	n;
-  int	i;
 
   n = 0;
-  i = 0;
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
-  if (content != NULL && param[n] == '\0' && content[1] == '\0')
-    ev->key_right = content[0];
+  if (content != NULL && param[n] == '\0')
+    copstr(ev->key_right, content, 0);
   else if (param[n] != '\0')
     {
-      while (param[n] != '\0')
-	{
-	  n += 1;
-	  i += 1;
-	}
-      if (i != 2)
+      if (param[n] != '\0' && param[n + 1] != '\0')
+	n += 1;
+      else
 	return (-1);
-      ev->key_right = param[n - 1];
+      copstr(ev->key_right, param, n);
     }
-  else if (param[n] == '\0' && content != NULL && content[1] != '\0')
+  else if (param[n] == '\0' && content != NULL)
     return (-1);
   return (0);
 }
@@ -95,26 +80,21 @@ int	key_right(t_events *ev, char *param, char *content)
 int	key_left(t_events *ev, char *param, char *content)
 {
   int	n;
-  int	i;
 
   n = 0;
-  i = 0;
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
-  if (content != NULL && param[n] == '\0' && content[1] == '\0')
-    ev->key_left = content[0];
+  if (content != NULL && param[n] == '\0')
+    copstr(ev->key_left, content, 0);
   else if (param[n] != '\0')
     {
-      while (param[n] != '\0')
-	{
-	  n += 1;
-	  i += 1;
-	}
-      if (i != 2)
+      if (param[n] != '\0' && param[n + 1] != '\0')
+	n += 1;
+      else
 	return (-1);
-      ev->key_left = param[n - 1];
+      copstr(ev->key_left, param, n);
     }
-  else if (param[n] == '\0' && content != NULL && content[1] != '\0')
+  else if (param[n] == '\0' && content != NULL)
     return (-1);
   return (0);
 }

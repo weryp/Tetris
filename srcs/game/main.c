@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 07:09:19 2016 Paul Wery
-** Last update Sun Mar  6 01:55:01 2016 Paul Wery
+** Last update Thu Mar 10 00:04:29 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -61,11 +61,10 @@ char	**create_aff_map(int n, int i, t_events *ev)
   return (map);
 }
 
-char	**ini_tetris(const char *file, t_events *ev)
+char	**ini_tetris(t_events *ev)
 {
   char	**map;
 
-  newterm(file, stderr, stdin);
   if ((map = create_aff_map(0, 0, ev)) == NULL)
     return (NULL);
   if (error_size(ev) == -1)
@@ -74,46 +73,60 @@ char	**ini_tetris(const char *file, t_events *ev)
   return (map);
 }
 
-void		start_ncurses(t_tetris *tet, WINDOW *new_win,
-			      int ac, char **av)
+void		start_ncurses(t_tetris *tet, t_events *ev,
+			      SCREEN *scr)
 {
-  t_events	ev;
   char		**map;
   int		end;
 
   end = 0;
-  ini_events(&ev, tet);
-  ini_game(&ev);
-  if (ac > 1)
-    load_params_tetris(&ev, av);
-  if ((map = ini_tetris((const char*)new_win, &ev)) != NULL)
-    while (ev.key != ev.key_quit)
+  noecho();
+  keypad(stdscr, TRUE);
+  curs_set(0);
+  start_color();
+  ini_colors();
+  copstr(ev->key, "\0", 0);
+  if ((map = ini_tetris(ev)) != NULL)
+    while (cstr(ev->key, ev->key_quit) == 0)
       {
-	refresh();
-	nodelay(new_win, TRUE);
-	ev.key = getch();
+	copstr(ev->key, "\0", 0);
+	if (read(0, ev->key, 4) == -1)
+	  return ;
 	if (end == 0)
-	  if ((end = moove_tetrimino(map, tet, &ev, 1)) == -1)
-	    end_message(map, &ev);
+	  if ((end = moove_tetrimino(map, tet, ev, 1)) == -1)
+	    end_message(map, ev);
+	refresh();
       }
+  echo();
+  free_all(tet, map);
+  endwin();
+  delscreen(scr);
 }
 
 int		main(int ac, char **av)
 {
-  WINDOW	*new_win;
   t_tetris	*tet;
+  t_term_num	num;
+  t_events	ev;
+  SCREEN	*scr;
 
-  new_win = initscr();
-  noecho();
-  keypad(new_win, TRUE);
-  curs_set(0);
-  start_color();
-  ini_colors();
+  help(ac, av);
   if ((tet = create_list()) == NULL)
     return (0);
-  if (load_tetriminos(tet) == 0)
-    start_ncurses(tet, new_win, ac, av);
-  echo();
-  endwin();
+  if (ini_term(&num) == -1)
+    return (0);
+  if (load_tetriminos(tet) != 0)
+    return (0);
+  ini_events(&ev, tet);
+  ini_game(&ev, &num);
+  load_params_tetris(&ev, av);
+  if (ev.debug == 1)
+    start_debug(&ev, tet);
+  if ((scr = newterm(NULL, stdout, stdin)) == NULL)
+    return (0);
+  if (ini_end_read(0) == -1)
+    return (0);
+  start_ncurses(tet, &ev, scr);
+  ini_end_read(1);
   return (0);
 }

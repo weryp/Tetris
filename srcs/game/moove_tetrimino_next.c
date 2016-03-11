@@ -5,24 +5,32 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar  3 02:39:40 2016 Paul Wery
-** Last update Fri Mar  4 05:29:32 2016 Paul Wery
+** Last update Wed Mar  9 06:49:14 2016 Paul Wery
 */
 
 #include <stdlib.h>
+#include <unistd.h>
 #include <curses.h>
 #include "tetris.h"
 
-void	my_pause(t_events *ev)
+void	my_pause(t_events *ev, t_tetris *list, char **map)
 {
-  if (ev->key == ev->key_pause)
+  int	ret;
+
+  ret = 0;
+  if (cstr(ev->key, ev->key_pause) == 1)
     {
-      ev->key = 0;
-      while (ev->key != ev->key_pause)
+      ev->key[0] = '\0';
+      while (cstr(ev->key, ev->key_pause) == 0)
 	{
-	  ev->key = getch();
-	  if (ev->key == ev->key_quit)
+	  copstr(ev->key, "\0", 0);
+	  if (read(0, ev->key, 4) == -1)
+	    ret = -1;
+	  if (cstr(ev->key, ev->key_quit) == 1 || ret == -1)
 	    {
 	      endwin();
+	      ini_end_read(1);
+	      free_all(list, map);
 	      exit(0);
 	    }
 	}
@@ -56,7 +64,7 @@ void	check_border(t_start_pos *pos, t_events *ev)
 int	moove_tetrimino_next(char **map, t_events *ev,
 			     t_tetris *list)
 {
-  if (ev->key == ev->key_drop)
+  if (cstr(ev->key, ev->key_drop) == 1)
     {
       while (check_moove(map, ev->it, &ev->pos) == 0)
         {
@@ -68,6 +76,6 @@ int	moove_tetrimino_next(char **map, t_events *ev,
       clean_line(map, ev);
       return (-1);
     }
-  my_pause(ev);
+  my_pause(ev, list, map);
   return (0);
 }

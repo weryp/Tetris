@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 04:48:27 2016 Paul Wery
-** Last update Sun Mar  6 01:40:21 2016 Paul Wery
+** Last update Wed Mar  9 15:26:19 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -79,26 +79,21 @@ int	size_map(t_events *ev, char *param, char *content UNUSED)
 int	key_pause(t_events *ev, char *param, char *content)
 {
   int	n;
-  int	i;
 
   n = 0;
-  i = 0;
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
-  if (content != NULL && param[n] == '\0' && content[1] == '\0')
-    ev->key_pause = content[0];
+  if (content != NULL && param[n] == '\0')
+    copstr(ev->key_pause, content, 0);
   else if (param[n] != '\0')
     {
-      while (param[n] != '\0')
-	{
-	  n += 1;
-	  i += 1;
-	}
-      if (i != 2)
-        return (-1);
-      ev->key_pause = param[n - 1];
+      if (param[n] != '\0' && param[n + 1] != '\0')
+	n += 1;
+      else
+	return (-1);
+      copstr(ev->key_pause, param, n);
     }
-  else if (param[n] == '\0' && content != NULL && content[1] != '\0')
+  else if (param[n] == '\0' && content != NULL)
     return (-1);
   return (0);
 }
@@ -106,26 +101,21 @@ int	key_pause(t_events *ev, char *param, char *content)
 int	key_quit(t_events *ev, char *param, char *content)
 {
   int	n;
-  int	i;
 
   n = 0;
-  i = 0;
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
-  if (content != NULL && param[n] == '\0' && content[1] == '\0')
-    ev->key_quit = content[0];
+  if (content != NULL && param[n] == '\0')
+    copstr(ev->key_quit, content, 0);
   else if (param[n] != '\0')
     {
-      while (param[n] != '\0')
-	{
-	  n += 1;
-	  i += 1;
-	}
-      if (i != 2)
-        return (-1);
-      ev->key_quit = param[n - 1];
+      if (param[n] != '\0' && param[n + 1] != '\0')
+	n += 1;
+      else
+	return (-1);
+      copstr(ev->key_quit, param, n);
     }
-  else if (param[n] == '\0' && content != NULL && content[1] != '\0')
+  else if (param[n] == '\0' && content != NULL)
     return (-1);
   return (0);
 }

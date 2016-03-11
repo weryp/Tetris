@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar  3 11:31:15 2016 Paul Wery
-** Last update Sun Mar  6 01:58:03 2016 Paul Wery
+** Last update Fri Mar 11 02:47:50 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -64,11 +64,11 @@ void	aff_map_color(char **map, t_tetris *it,
 
 void	ini_colors(void)
 {
-  init_pair(1, COLOR_RED, COLOR_BLACK);
-  init_pair(2, COLOR_GREEN, COLOR_BLACK);
-  init_pair(3, COLOR_YELLOW, COLOR_BLACK);
-  init_pair(4, COLOR_BLUE, COLOR_BLACK);
-  init_pair(5, COLOR_MAGENTA, COLOR_BLACK);
+  init_pair(1, COLOR_RED, COLOR_RED);
+  init_pair(2, COLOR_GREEN, COLOR_GREEN);
+  init_pair(3, COLOR_YELLOW, COLOR_YELLOW);
+  init_pair(4, COLOR_BLUE, COLOR_BLUE);
+  init_pair(5, COLOR_MAGENTA, COLOR_MAGENTA);
   init_pair(6, COLOR_CYAN, COLOR_BLACK);
-  init_pair(7, COLOR_WHITE, COLOR_BLACK);
+  init_pair(7, COLOR_WHITE, COLOR_WHITE);
 }

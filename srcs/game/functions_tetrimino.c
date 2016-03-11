@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Mar  2 21:17:56 2016 Paul Wery
-** Last update Sun Mar  6 02:12:33 2016 Paul Wery
+** Last update Tue Mar  8 21:27:07 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -84,7 +84,7 @@ void	ini_events(t_events *ev, t_tetris *list)
   ev->tet_start = 0;
   ev->tetrimino = 0;
   ev->form = 0;
-  ev->key = 0;
+  ev->key[0] = '\0';
   ev->time_end = 0;
   ev->height_time = 0;
 }

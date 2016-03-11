@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Sun Mar  6 02:10:08 2016 Paul Wery
+** Last update Fri Mar 11 02:40:53 2016 Paul Wery
 */
 
 #ifndef TETRIS_H_
@@ -56,7 +56,7 @@ typedef struct	s_events
 {
   t_tetris	*it;
   t_start_pos	pos;
-  int		key;
+  char		key[5];
   int		form;
   int		nb_tet;
   int		tet_start;
@@ -64,15 +64,16 @@ typedef struct	s_events
   int		time_end;
   int		height_time;
   float		level;
-  int		key_left;
-  int		key_right;
-  int		key_turn;
-  int		key_drop;
-  int		key_quit;
-  int		key_pause;
+  char		key_left[5];
+  char		key_right[5];
+  char		key_turn[5];
+  char		key_drop[5];
+  char		key_quit[5];
+  char		key_pause[5];
   int		lines;
   int		cols;
   int		hide_tet;
+  int		debug;
 }		t_events;
 
 typedef struct	s_score
@@ -81,6 +82,14 @@ typedef struct	s_score
   int		best_player;
   int		level;
 }		t_score;
+
+typedef struct	s_term_num
+{
+  char		*kl;
+  char		*kr;
+  char		*ku;
+  char		*kd;
+}		t_term_num;
 
 int		get_params(char *buffer, int param);
 void		cop_string(char *name, char *src);
@@ -128,9 +137,25 @@ int		size_map(t_events *ev, char *param, char *content);
 int		key_pause(t_events *ev, char *param, char *content);
 int		key_quit(t_events *ev, char *param, char *content);
 int		get_nb(char *str, int param, int n);
-void		ini_game(t_events *ev);
+void		ini_game(t_events *ev, t_term_num *num);
 void		load_params_tetris(t_events *ev, char **av);
 int		opt(char *str, char *src_one,
 		    char *src_two, char *src_three);
+void		help(int ac, char **av);
+void		my_putstr(char *str);
+void		free_all(t_tetris *list, char **map);
+int		ini_term(t_term_num *num);
+int		cstr(char *str, char *src);
+void		copstr(char *dest, char *str, int n);
+int		ini_end_read(int state);
+void		start_debug(t_events *ev, t_tetris *list);
+char		*alloc_buffer(int fd, char *file);
+void		put_in_order(t_tetris *list);
+void		aff_name(char *name);
+void		delete_elem(t_tetris *elem);
+void		debug_tetrimino(t_tetris *elem);
+char		*my_path(char *file, char *tet);
+void		my_putchar(char c);
+void		my_putnbr(int nb);
 
 #endif /* !TETRIS_H_ */
