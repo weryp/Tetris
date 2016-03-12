@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Feb 29 15:54:56 2016 Paul Wery
-** Last update Sat Mar 12 02:34:01 2016 Paul Wery
+** Last update Sat Mar 12 17:56:12 2016 Paul Wery
 */
 
 #ifndef PARAM_H_
@@ -38,5 +38,7 @@ void		print_score(t_display_env *data, int line, int col);
 void		print_level(t_display_env *data, int line, int col);
 void		print_timer(int line, int col);
 void		print_nbr(int nb, int line, int col);
+void		save_high_score(int score_player);
+int		get_high_score(void);
 
 #endif /* !PARAM_H_ */

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Mar 12 01:29:03 2016 Paul Wery
-** Last update Sat Mar 12 03:21:59 2016 Paul Wery
+** Last update Sat Mar 12 18:14:56 2016 Paul Wery
 */
 
 #include <sys/types.h>
@@ -50,23 +50,13 @@ void		print_timer(int line, int col)
 
 void	print_level(t_display_env *data, int line, int col)
 {
-  int	n;
-  int	i;
-
-  i = 4;
-  n = data->ev->level;
-  while (n > 9)
-    {
-      n /= 10;
-      i -= 1;
-    }
   mvprintw(line + 6, col, "| Level      ");
   mvprintw(line + 6, col + 16, "00");
   mvprintw(line + 6, col + 18, " |");
-  print_nbr(data->ev->level, line + 6, col + 13 + i);
+  print_nbr(data->ev->level, line + 6, col + 13 + 4);
 }
 
-int	get_hight_score(void)
+int	get_high_score(void)
 {
   int	n;
   int	i;
@@ -75,16 +65,13 @@ int	get_hight_score(void)
 
   n = 0;
   i = 0;
-  buffer[0] = '\0';
-  buffer[1] = '\0';
-  buffer[2] = '\0';
-  buffer[3] = '\0';
-  buffer[4] = '\0';
-  buffer[5] = '\0';
-  if ((fd = open("datas/hight_score", O_RDONLY)) == -1)
+  while (n < 6)
+    buffer[n++] = '\0';
+  if ((fd = open("datas/high_score", O_RDONLY)) == -1)
     return (0);
   if (read(fd, buffer, 5) == -1)
     return (0);
+  n = 0;
   while (n < 5 && buffer[n] != '\0')
     {
       i = (i * 10) + (buffer[n] - 48);
@@ -96,29 +83,13 @@ int	get_hight_score(void)
 
 void	print_score(t_display_env *data, int line, int col)
 {
-  int	n;
-  int	i;
-  int	hight_score;
+  int	high_score;
 
-  i = 4;
   mvprintw(line + 2, col, "| High Score ");
   mvprintw(line + 2, col + 18, " |");
-  hight_score = get_hight_score();
-  n = hight_score;
-  while (n > 9)
-    {
-      n /= 10;
-      i -= 1;
-    }
-  print_nbr(hight_score, line + 2, col + 13 + i);
-  i = 4;
+  high_score = get_high_score();
+  print_nbr(high_score, line + 2, col + 13 + 4);
   mvprintw(line + 3, col, "| Score      ");
   mvprintw(line + 3, col + 18, " |");
-  n = data->ev->score;
-  while (n > 9)
-    {
-      n /= 10;
-      i -= 1;
-    }
   print_nbr(data->ev->score, line + 3, col + 13 + 4);
 }

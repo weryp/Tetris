@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 07:09:19 2016 Paul Wery
-** Last update Sat Mar 12 02:58:14 2016 Paul Wery
+** Last update Sat Mar 12 17:58:17 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -99,6 +99,7 @@ void		start_ncurses(t_tetris *tet, t_events *ev,
 	  link_with_game(ev, tet);
 	refresh();
       }
+  save_high_score(ev->score);
   echo();
   free_all(tet, map);
   endwin();
