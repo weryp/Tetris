@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 01:08:20 2016 Paul Wery
-** Last update Sun Mar  6 01:56:25 2016 Paul Wery
+** Last update Sat Mar 12 03:19:21 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -28,7 +28,8 @@ void	aff_content_map(char **map, t_events *ev)
 	  attron(COLOR_PAIR(7));
 	  c[0] = map[n][i];
 	  mvprintw((LINES / 2) - (ev->lines / 2 + 1) + n,
-                   (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
+                   (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w)
+				 / 2 - 22)
                    + i, c);
           i += 1;
 	  attroff(COLOR_PAIR(7));
@@ -62,6 +63,7 @@ void	destroy_line(char **map, int n, t_events *ev)
 
   i = 1;
   ev->level += 0.1;
+  ev->score += 50 * ev->level;
   while (map[n][i] != '|' && map[n][i] != '\0')
     map[n][i++] = ' ';
   moove_lines(map, n, ev);

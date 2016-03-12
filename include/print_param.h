@@ -5,63 +5,38 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Feb 29 15:54:56 2016 Paul Wery
-** Last update Sun Mar  6 02:26:48 2016 Paul Wery
+** Last update Sat Mar 12 02:34:01 2016 Paul Wery
 */
 
 #ifndef PARAM_H_
 # define PARAM_H_
 
-# define MAX_SCORE_SIZE (12)
-
-# define T_MIN_WIDHT (50)
-# define T_MIN_HEIGHT (30)
-
-# define SCOREBOX_POSX(data) (0)
-# define SCOREBOX_POSY(data) (data->title.size.y + 2)
-# define TITLE_POSX(data) (0)
-# define TITLE_POSY(data) (0)
-# define NEXTBOX_POSX(data) (data->term_size.x - data->nextbox.size.x)
-# define NEXTBOX_POSY(data) (0)
-
 # include <curses.h>
 # include "tetris.h"
 
-typedef	struct	s_pos
-{
-  int		x;
-  int		y;
-}		t_pos;
-
-typedef	struct	s_scorebox
+typedef	struct	s_state_game
 {
   int		level;
+  int		timer;
   int		player_score;
-  int		best_score;
-  int		time;
-  t_pos		pos;
-  t_pos		size;
-}		t_scorebox;
+  int		hight_score;
+}		t_state_game;
 
-typedef	struct	s_title
+typedef	struct	s_display_env
 {
-  char		*title;
-  t_pos		pos;
-}		t_title;
+  t_events	*ev;
+  t_tetris	*list;
+  t_state_game	state;
+  t_start_pos	pos;
+}		t_display_env;
 
-typedef	struct	s_nextbox
-{
-  struct s_obj	*obj;
-  t_pos		pos;
-  t_pos		size;
-}		t_nextbox;
-
-typedef	struct	s_display_game_param
-{
-  WINDOW	*term;
-  t_pos		term_size;
-  t_scorebox	scorebox;
-  t_nextbox	nextbox;
-  t_title	title;
-}		t_display_game_param;
+void		link_with_game(t_events *ev, t_tetris *list);
+int		print_all(t_display_env *data);
+void		print_title(void);
+void		print_state_game(t_display_env *data);
+void		print_score(t_display_env *data, int line, int col);
+void		print_level(t_display_env *data, int line, int col);
+void		print_timer(int line, int col);
+void		print_nbr(int nb, int line, int col);
 
 #endif /* !PARAM_H_ */

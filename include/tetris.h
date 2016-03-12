@@ -5,22 +5,16 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Fri Mar 11 17:16:36 2016 Paul Wery
+** Last update Sat Mar 12 00:56:15 2016 Paul Wery
 */
 
 #ifndef TETRIS_H_
 # define TETRIS_H_
 
-# define WIDTH_NEED (48)
-# define HEIGHT_NEED (22)
-# define START_INTERFACE_H (6)
-# define WIDTH_TAB_SCORE (20)
-# define GAP (4)
-
 # define UNUSED __attribute__((unused))
 
 # include <sys/stat.h>
-# include "print_param.h"
+# include <curses.h>
 
 typedef struct dirent t_dir;
 typedef struct stat t_stat;
@@ -61,9 +55,11 @@ typedef struct	s_events
   int		nb_tet;
   int		tet_start;
   int		tetrimino;
+  int		tet_next;
   int		time_end;
   int		height_time;
   float		level;
+  int		score;
   char		key_left[5];
   char		key_right[5];
   char		key_turn[5];
@@ -74,6 +70,7 @@ typedef struct	s_events
   int		cols;
   int		hide_tet;
   int		debug;
+  int		m_w;
 }		t_events;
 
 typedef struct	s_score
@@ -114,7 +111,7 @@ int		moove_tetrimino_next(char **map, t_events *ev,
 				     t_tetris *list);
 int		change_form(char **map, t_tetris *it,
 			    t_start_pos *pos, t_events *ev);
-int		error_size(t_events *ev, SCREEN *scr);
+int		error_size(t_events *ev, SCREEN *scr, t_tetris *list);
 void		ini_colors(void);
 void		aff_map_color(char **map, t_tetris *it,
 			      t_start_pos *pos, t_events *ev);
@@ -158,5 +155,8 @@ char		*my_path(char *file, char *tet);
 void		my_putchar(char c);
 void		my_putnbr(int nb);
 void		str_debug(char *str);
+void		generate_tetrimino(t_events *ev);
+
+# include "print_param.h"
 
 #endif /* !TETRIS_H_ */

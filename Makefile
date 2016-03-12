@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sun Feb 28 06:27:14 2016 Paul Wery
-## Last update Thu Mar 10 23:39:22 2016 Paul Wery
+## Last update Sat Mar 12 02:28:33 2016 Paul Wery
 ##
 
 NAME	=	tetris
@@ -43,7 +43,11 @@ SRCS	=	srcs/game/main.c \
 		srcs/game/ini_end_read.c \
 		srcs/game/debug.c \
 		srcs/game/debug_next.c \
-		srcs/game/debug_tetrimino.c
+		srcs/game/debug_tetrimino.c \
+		srcs/interface/link_with_game.c \
+		srcs/interface/print_all.c \
+		srcs/interface/display_env.c \
+		srcs/interface/elems_state_game.c
 
 all	:	$(NAME)
 

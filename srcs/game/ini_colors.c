@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar  3 11:31:15 2016 Paul Wery
-** Last update Fri Mar 11 02:47:50 2016 Paul Wery
+** Last update Sat Mar 12 02:58:29 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -24,7 +24,8 @@ void	clear_map(char **map, t_events *ev)
         {
 	  if (map[n][i] == ' ')
 	    mvprintw((LINES / 2) - (ev->lines / 2 + 1) + n,
-		     (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
+		     (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w)
+				   / 2 - 22)
 		     + i, " ");
           i += 1;
         }
@@ -51,7 +52,7 @@ void	aff_map_color(char **map, t_tetris *it,
         {
 	  if (map[y][x] == '*' && it->obj.tetrimino[n][i] == '*')
 	    mvprintw((LINES / 2) - (ev->lines / 2 + 1) + y,
-		     (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
+		     (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w) / 2 - 22)
 		     + x, "*");
           x += 1;
           i += 1;

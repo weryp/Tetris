@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Mar  7 02:18:09 2016 Paul Wery
-** Last update Fri Mar 11 12:43:46 2016 Paul Wery
+** Last update Fri Mar 11 23:58:21 2016 Paul Wery
 */
 
 #include <sys/ioctl.h>
@@ -95,7 +95,6 @@ void		debug_next(t_events *ev, t_tetris *list)
 
 void	start_debug(t_events *ev, t_tetris *list)
 {
-  put_in_order(list);
   if (ev->debug == 1)
     {
       my_putstr("*** DEBUG MODE ***\n");

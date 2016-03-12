@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 03:56:19 2016 Paul Wery
-** Last update Wed Mar  9 22:46:16 2016 Paul Wery
+** Last update Fri Mar 11 22:31:20 2016 Paul Wery
 */
 
 #include "tetris.h"
@@ -85,4 +85,5 @@ void	ini_game(t_events *ev, t_term_num *num)
   ev->cols = 10;
   ev->hide_tet = 0;
   ev->debug = 0;
+  ev->score = 0;
 }

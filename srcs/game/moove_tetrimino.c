@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Mar  2 16:40:24 2016 Paul Wery
-** Last update Fri Mar 11 12:41:11 2016 Paul Wery
+** Last update Fri Mar 11 17:54:19 2016 Paul Wery
 */
 
 #define _POSIX_SOURCE
@@ -124,8 +124,8 @@ int		moove_tetrimino(char **map, t_tetris *list,
 				t_events *ev, int turn)
 {
   ev->it = list->next;
-  if (ev->tetrimino == 0)
-    ev->tetrimino = rand() % (ev->nb_tet - 1) + 1;
+  /*if (ev->tetrimino == 0)
+    ev->tetrimino = rand() % (ev->nb_tet - 1) + 1;*/
   while (turn < ev->tetrimino)
     {
       turn += 1;

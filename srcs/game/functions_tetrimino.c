@@ -5,10 +5,11 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Mar  2 21:17:56 2016 Paul Wery
-** Last update Tue Mar  8 21:27:07 2016 Paul Wery
+** Last update Fri Mar 11 23:59:08 2016 Paul Wery
 */
 
 #include <curses.h>
+#include <stdlib.h>
 #include "tetris.h"
 
 void	clear_tetrimino(char **map, t_start_pos *pos, t_obj *obj)
@@ -73,6 +74,7 @@ void	ini_pos(t_start_pos *pos, t_events *ev)
 
 void	ini_events(t_events *ev, t_tetris *list)
 {
+  put_in_order(list);
   ev->nb_tet = 1;
   ev->it = list->next;
   while (ev->it->next != list)
@@ -83,8 +85,26 @@ void	ini_events(t_events *ev, t_tetris *list)
     }
   ev->tet_start = 0;
   ev->tetrimino = 0;
+  ev->tet_next = 0;
   ev->form = 0;
   ev->key[0] = '\0';
   ev->time_end = 0;
   ev->height_time = 0;
+}
+
+void	generate_tetrimino(t_events *ev)
+{
+  if (ev->tet_next == 0)
+    {
+      ev->tetrimino = rand() % (ev->nb_tet - 1) + 1;
+      if (ev->tetrimino < ev->nb_tet)
+	ev->tet_next = ev->tetrimino + 1;
+      else
+	ev->tet_next = ev->tetrimino - 1;
+    }
+  else if (ev->tetrimino == 0)
+    {
+      ev->tetrimino = ev->tet_next;
+      ev->tet_next = rand() % (ev->nb_tet - 1) + 1;
+    }
 }

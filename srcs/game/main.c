@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 07:09:19 2016 Paul Wery
-** Last update Fri Mar 11 17:19:06 2016 Paul Wery
+** Last update Sat Mar 12 02:58:14 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -26,7 +26,8 @@ void	aff_map(char **map, t_events *ev)
       while (map[n][i] != '\0')
 	{
 	  mvprintw((LINES / 2) - (ev->lines / 2 + 1) + n,
-		   (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
+		   (COLS / 2) - ((ev->cols + 2 + 26 +
+				  ev->m_w) / 2 - 22)
 		   + i, &map[n][i]);
 	  i += 1;
 	}
@@ -84,15 +85,18 @@ void		start_ncurses(t_tetris *tet, t_events *ev,
 
   end = 0;
   copstr(ev->key, "\0", 0);
-  if ((map = ini_tetris(ev)) != NULL)
+  if ((map = ini_tetris(ev)) != NULL && ev->nb_tet > 0 && ev->cols >= ev->m_w)
     while (cstr(ev->key, ev->key_quit) == 0)
       {
 	copstr(ev->key, "\0", 0);
 	if (read(0, ev->key, 4) == -1)
 	  return ;
+	generate_tetrimino(ev);
 	if (end == 0)
 	  if ((end = moove_tetrimino(map, tet, ev, 1)) == -1)
 	    end_message(map, ev);
+	if (end == 0)
+	  link_with_game(ev, tet);
 	refresh();
       }
   echo();
@@ -121,7 +125,7 @@ int		main(int ac, char **av)
   start_debug(&ev, tet);
   if ((scr = newterm(NULL, stdout, stdin)) == NULL)
     return (0);
-  error_size(&ev, scr);
+  error_size(&ev, scr, tet);
   if (ini_end_read(0) == -1)
     return (0);
   start_ncurses(tet, &ev, scr);

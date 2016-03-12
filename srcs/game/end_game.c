@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 03:25:34 2016 Paul Wery
-** Last update Sun Mar  6 02:33:01 2016 Paul Wery
+** Last update Sat Mar 12 02:59:05 2016 Paul Wery
 */
 
 #include <curses.h>
@@ -23,13 +23,15 @@ void	end_message(char **map, t_events *ev)
       while (map[n][i] != '|' && map[n][i] != '\0')
         {
 	  mvprintw((LINES / 2) - (ev->lines / 2 + 1) + n,
-                   (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
+                   (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w)
+				 / 2 - 22)
                    + i, " ");
           i += 1;
         }
       n += 1;
     }
-  mvprintw((LINES / 2), (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
+  mvprintw((LINES / 2), (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w)
+				      / 2 - 22)
 	   + (ev->cols / 2 - 3), "END GAME");
 }
 
