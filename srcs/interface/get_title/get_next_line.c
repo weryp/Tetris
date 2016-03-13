@@ -1,11 +1,11 @@
 /*
 ** get_next_line.c<CPE_2015_getnextline> for get_next_line in /home/hoarau/Code/CPE/CPE_2015_getnextline
-** 
+**
 ** Made by hoarau
 ** Login   <hoarau_v@epitech.net>
-** 
+**
 ** Started on  Mon Mar  7 23:12:38 2016 hoarau
-** Last update Thu Mar 10 18:51:58 2016 hoarau
+** Last update Sun Mar 13 19:22:45 2016 Paul Wery
 */
 
 # include "get_next_line.h"
@@ -13,13 +13,14 @@
 char		add_car(const int fd)
 {
   static char	buf[READ_SIZE];
-  static char		*buffer;
+  static char	*buffer;
   static int	length = 0;
   char		c;
 
   if (length == 0)
     {
-      length = read(fd, buf, READ_SIZE);
+      if (length = read(fd, buf, READ_SIZE) == -1)
+	return (-1);
       buffer = (char*)&buf;
       if (length == 0)
 	return ('\0');
@@ -57,13 +58,15 @@ char	*get_next_line(const int fd)
   if ((str = malloc(READ_SIZE + 1)) == NULL || fd < 0)
     return (NULL);
   i = 0;
-  c = add_car(fd);
+  if (c = add_car(fd) == -1)
+    return (NULL);
   while (c != '\0' && c != '\n')
     {
       str[i++] = c;
       c = add_car(fd);
       if (i % READ_SIZE == 0)
-	str = my_realloc(str, READ_SIZE + i + 1);
+	if ((str = my_realloc(str, READ_SIZE + i + 1)) == NULL)
+	  return (NULL);
     }
   str[i] = '\0';
   if (c == '\0' && str[0] == '\0')
