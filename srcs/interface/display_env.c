@@ -5,7 +5,7 @@
 ** Login   <hoarau_v@epitech.net>
 **
 ** Started on  Mon Feb 29 16:17:42 2016 victor hoarau
-** Last update Sat Mar 12 23:59:34 2016 Paul Wery
+** Last update Sun Mar 13 18:42:46 2016 Victor Hoarau
 */
 
 # include <ncurses.h>
@@ -22,20 +22,12 @@ void	print_nbr(int nb, int line, int col)
   mvprintw(line, col, c);
 }
 
-void	print_title(void)
+void	print_title(char *title)
 {
-  mvprintw(0, 0, "_________________________________");
-  mvprintw(1, 0, "\\__    ___/\\_   _____/\\__    ___/");
-  mvprintw(2, 0, "  |    |    |    __)_   |    |   ");
-  mvprintw(3, 0, "  |    |    |        \\  |    |   ");
-  mvprintw(4, 0, "  |____|   /_______  /  |____|   ");
-  mvprintw(5, 0, "                   \\/            ");
-  mvprintw(0, 33, "__________.___  _________");
-  mvprintw(1, 33, "\\______   \\   |/   _____/");
-  mvprintw(2, 33, " |       _/   |\\_____  \\ ");
-  mvprintw(3, 33, " |    |   \\   |/        \\");
-  mvprintw(4, 33, " |____|_  /___/_______  /");
-  mvprintw(5, 33, "        \\/            \\/ ");
+  if (title != NULL)
+    mvprintw(0, 0, title);
+  else
+    mvprintw(0, 0, "TETRIS");
 }
 
 void	print_state_game(t_display_env *data)

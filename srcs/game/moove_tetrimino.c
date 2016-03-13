@@ -5,11 +5,9 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Mar  2 16:40:24 2016 Paul Wery
-** Last update Sun Mar 13 01:28:15 2016 Paul Wery
+** Last update Sun Mar 13 17:40:13 2016 Victor Hoarau
 */
 
-#define _POSIX_SOURCE
-#define _BSD_SOURCE
 #include <ncurses.h>
 #include <stdlib.h>
 #include <unistd.h>

@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sun Feb 28 06:27:14 2016 Paul Wery
-## Last update Sun Mar 13 00:49:55 2016 Paul Wery
+## Last update Sun Mar 13 18:19:49 2016 Victor Hoarau
 ##
 
 NAME	=	tetris
@@ -14,7 +14,7 @@ RM	=	rm -f
 
 CC	=	gcc
 
-CFLAGS	=	-W -Wall -Werror -ansi -pedantic -Iinclude
+CFLAGS	=	-W -Wall -Werror -Iinclude
 
 OBJS	=	$(SRCS:.c=.o)
 
@@ -51,12 +51,22 @@ SRCS	=	srcs/game/main.c \
 		srcs/interface/elems_state_game.c \
 		srcs/interface/save_hight_score.c \
 		srcs/interface/next_tetrimino.c \
-		srcs/interface/aff_next_tetrimino.c
+		srcs/interface/aff_next_tetrimino.c \
+		srcs/interface/get_title/get_title.c \
+		srcs/interface/get_title/get_next_line.c \
+		srcs/interface/get_title/my_stracat.c
+
+
+
+$(NAME)	:	$(OBJS)
+		@$(CC) $(OBJS) -o $(NAME) -lncurses
+		@(aplay ./.Makedata/.1punch_op > /dev/null 2> /dev/null || echo "Tune Failed") &
+		@(cat ./.Makedata/.punch.txt 2> /dev/null || echo "Image Failed")
 
 all	:	$(NAME)
 
-$(NAME)	:	$(OBJS)
-		$(CC) $(OBJS) -o $(NAME) -lncurses
+tune	:
+		@(aplay ./.Makedata/.tetris > /dev/null 2> /dev/null || echo "Tune Failed") &
 
 clean	:
 		$(RM) $(OBJS)
@@ -67,3 +77,5 @@ fclean	:	clean
 re	:	fclean all
 
 .PHONY	:	all clean fclean re
+
+.SILENT	:	$(OBJS)

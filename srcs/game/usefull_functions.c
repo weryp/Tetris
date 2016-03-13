@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Feb 29 21:05:52 2016 Paul Wery
-** Last update Sat Mar 12 22:28:50 2016 Paul Wery
+** Last update Sun Mar 13 17:32:26 2016 Victor Hoarau
 */
 
 int	my_strlen(char *str)
@@ -39,7 +39,7 @@ int	start_buffer(char *buffer, int param, int n)
     {
       while (buffer[n] > 47 && buffer[n] < 58 && buffer[n] != '\0')
 	n += 1;
-      while((buffer[n] == ' ' || buffer[n] == '\t') && buffer[n] != '\0')
+      while ((buffer[n] == ' ' || buffer[n] == '\t') && buffer[n] != '\0')
 	n += 1;
       i += 1;
     }
@@ -53,7 +53,7 @@ int	get_params(char *buffer, int param)
 
   n = 0;
   val = 0;
-  while((buffer[n] == ' ' || buffer[n] == '\t') && buffer[n] != '\0')
+  while ((buffer[n] == ' ' || buffer[n] == '\t') && buffer[n] != '\0')
     n += 1;
   n = start_buffer(buffer, param, n);
   while (buffer[n] != ' ' && buffer[n] != '\t'

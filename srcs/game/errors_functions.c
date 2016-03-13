@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar  3 10:44:40 2016 Paul Wery
-** Last update Sun Mar 13 03:20:25 2016 Paul Wery
+** Last update Sun Mar 13 18:32:35 2016 Victor Hoarau
 */
 
 #include <stdlib.h>
@@ -63,7 +63,7 @@ int		error_size(t_events *ev, SCREEN *scr, t_tetris *list)
       getch();
       endwin();
       delscreen(scr);
-      exit(0);
+      return (-1);
     }
   return (0);
 }
