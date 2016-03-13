@@ -1,11 +1,11 @@
 /*
 ** my_stracat.c for tetris in /home/hoarau/Code/PSU/PSU_2015_tetris
-** 
+**
 ** Made by hoarau_v
 ** Login   <hoarau_v@epitech.net>
-** 
+**
 ** Started on  Sat Mar 12 17:41:10 2016 hoarau_v
-** Last update Sat Mar 12 17:41:13 2016 hoarau_v
+** Last update Sun Mar 13 22:40:28 2016 Paul Wery
 */
 
 # include <stdlib.h>
@@ -28,8 +28,8 @@ char	*my_stracat(char *dest, char *src)
   int	i;
   int	j;
 
-  if ((result = malloc(sizeof(char) * (1 + mystrlen(dest) + mystrlen(src))))
-      == NULL)
+  if ((result = malloc(sizeof(char) * (1 + mystrlen(dest) +
+				       mystrlen(src)))) == NULL)
     return (NULL);
   i = 0;
   if (dest != NULL)

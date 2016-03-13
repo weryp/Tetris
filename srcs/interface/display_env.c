@@ -5,9 +5,10 @@
 ** Login   <hoarau_v@epitech.net>
 **
 ** Started on  Mon Feb 29 16:17:42 2016 victor hoarau
-** Last update Sun Mar 13 19:14:26 2016 Victor Hoarau
+** Last update Sun Mar 13 22:41:40 2016 Paul Wery
 */
 
+# include <stdlib.h>
 # include <ncurses.h>
 # include "print_param.h"
 
@@ -25,7 +26,10 @@ void	print_nbr(int nb, int line, int col)
 void	print_title(char *title)
 {
   if (title != NULL)
-    mvprintw(0, 0, title);
+    {
+      mvprintw(0, 0, title);
+      free(title);
+    }
   else
     mvprintw(0, 0, "TETRIS");
 }

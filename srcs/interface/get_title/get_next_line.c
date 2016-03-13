@@ -5,7 +5,7 @@
 ** Login   <hoarau_v@epitech.net>
 **
 ** Started on  Mon Mar  7 23:12:38 2016 hoarau
-** Last update Sun Mar 13 19:41:37 2016 Victor Hoarau
+** Last update Sun Mar 13 22:48:59 2016 Paul Wery
 */
 
 # include "get_next_line.h"
@@ -44,9 +44,19 @@ char	*my_realloc(char *str, int size)
       tmp[i] = str[i];
       i += 1;
     }
-  tmp[size] = '\0';
+  while (i < size)
+    tmp[i++] = '\0';
   free(str);
   return (tmp);
+}
+
+void	ini_str(char *str)
+{
+  int	n;
+
+  n = 0;
+  while (n < (READ_SIZE + 1))
+    str[n++] = '\0';
 }
 
 char	*get_next_line(const int fd)
@@ -55,9 +65,10 @@ char	*get_next_line(const int fd)
   char	*str;
   char	c;
 
+  i = 0;
   if ((str = malloc(READ_SIZE + 1)) == NULL || fd < 0 || (c = add_car(fd)) < 0)
     return (NULL);
-  i = 0;
+  ini_str(str);
   while (c != '\0' && c != '\n')
     {
       str[i++] = c;
@@ -69,6 +80,9 @@ char	*get_next_line(const int fd)
     }
   str[i] = '\0';
   if (c == '\0' && str[0] == '\0')
-    return (NULL);
+    {
+      free(str);
+      return (NULL);
+    }
   return (str);
 }
