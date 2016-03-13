@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 03:25:34 2016 Paul Wery
-** Last update Sun Mar 13 00:00:51 2016 Paul Wery
+** Last update Sun Mar 13 19:01:45 2016 Victor Hoarau
 */
 
 #include <ncurses.h>
@@ -22,19 +22,19 @@ void	end_message(char **map, t_events *ev)
       i = 1;
       while (map[n][i] != '|' && map[n][i] != '\0')
         {
-	  mvprintw((LINES / 2) - (ev->lines / 2 + 1) + n,
-                   (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w)
-				 / 2 - 22)
-                   + i, " ");
+	  mvprintw(((LINES / 2) - (ev->lines / 2 + 1) + n),
+                   ((COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w) / 2 - 22) + i),
+		   " ");
           i += 1;
         }
       n += 1;
     }
   init_pair(1, COLOR_RED, COLOR_BLACK);
   attron(COLOR_PAIR(1));
-  mvprintw((LINES / 2), (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w)
-				      / 2 - 22)
-	   + (ev->cols / 2 - 3), "GAME OVER");
+  mvprintw((LINES / 2),
+	   ((COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w) / 2 - 22) +
+	    (ev->cols / 2 - 3)),
+	   "GAME OVER");
   attroff(COLOR_PAIR(1));
 }
 

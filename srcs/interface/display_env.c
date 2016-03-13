@@ -5,7 +5,7 @@
 ** Login   <hoarau_v@epitech.net>
 **
 ** Started on  Mon Feb 29 16:17:42 2016 victor hoarau
-** Last update Sun Mar 13 18:42:46 2016 Victor Hoarau
+** Last update Sun Mar 13 19:14:26 2016 Victor Hoarau
 */
 
 # include <ncurses.h>
@@ -37,14 +37,14 @@ void	print_state_game(t_display_env *data)
 
   line = (LINES / 2) - 6;
   col = (COLS / 2) - ((data->ev->cols + 2 + 26 + data->ev->m_w) / 2);
-  mvprintw(line + 0, col, "/------------------\\");
-  mvprintw(line + 1, col, "|                  |");
+  mvprintw(line + 0, col, STATE_GAME_TOP_BOX);
+  mvprintw(line + 1, col, STATE_GAME_M_BOX);
   print_score(data, line, col);
-  mvprintw(line + 4, col, "|                  |");
-  mvprintw(line + 5, col, "|                  |");
+  mvprintw(line + 4, col, STATE_GAME_M_BOX);
+  mvprintw(line + 5, col, STATE_GAME_M_BOX);
   print_level(data, line, col);
-  mvprintw(line + 7, col, "|                  |");
+  mvprintw(line + 7, col, STATE_GAME_M_BOX);
   print_timer(line, col);
-  mvprintw(line + 9, col, "|                  |");
-  mvprintw(line + 10, col, "\\------------------/");
+  mvprintw(line + 9, col, STATE_GAME_M_BOX);
+  mvprintw(line + 10, col, STATE_GAME_TOP_BOX);
 }

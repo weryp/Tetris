@@ -5,7 +5,7 @@
 ** Login   <hoarau_v@epitech.net>
 **
 ** Started on  Mon Mar  7 23:12:38 2016 hoarau
-** Last update Sun Mar 13 19:41:37 2016 Victor Hoarau
+** Last update Sun Mar 13 19:22:45 2016 Paul Wery
 */
 
 # include "get_next_line.h"
@@ -19,7 +19,7 @@ char		add_car(const int fd)
 
   if (length == 0)
     {
-      if ((length = read(fd, buf, READ_SIZE)) < 0)
+      if ((length = read(fd, buf, READ_SIZE) == -1)
 	return (-1);
       buffer = (char*)&buf;
       if (length == 0)
@@ -55,14 +55,15 @@ char	*get_next_line(const int fd)
   char	*str;
   char	c;
 
-  if ((str = malloc(READ_SIZE + 1)) == NULL || fd < 0 || (c = add_car(fd)) < 0)
+  if ((str = malloc(READ_SIZE + 1)) == NULL || fd < 0)
     return (NULL);
   i = 0;
+  if (c = add_car(fd) == -1)
+    return (NULL);
   while (c != '\0' && c != '\n')
     {
       str[i++] = c;
-      if ((c = add_car(fd)) < 0)
-	return (NULL);
+      c = add_car(fd);
       if (i % READ_SIZE == 0)
 	if ((str = my_realloc(str, READ_SIZE + i + 1)) == NULL)
 	  return (NULL);

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Mar 12 22:04:03 2016 Paul Wery
-** Last update Sat Mar 12 23:59:28 2016 Paul Wery
+** Last update Sun Mar 13 19:20:21 2016 Victor Hoarau
 */
 
 #include <ncurses.h>
@@ -27,7 +27,7 @@ void	aff_tet_in_edge(t_obj obj, int line, int col)
 	  c[0] = obj.tetrimino[n][i];
 	  attron(COLOR_PAIR(obj.color));
 	  if (obj.tetrimino[n][i] == '*')
-	    mvprintw(line + n, col + i, c);
+	    mvprintw((line + n), (col + i), c);
 	  attroff(COLOR_PAIR(obj.color));
 	  i += 1;
 	}

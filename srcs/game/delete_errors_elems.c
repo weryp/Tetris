@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Mar 12 20:26:45 2016 Paul Wery
-** Last update Sat Mar 12 20:32:40 2016 Paul Wery
+** Last update Sun Mar 13 19:02:39 2016 Victor Hoarau
 */
 
 #include <sys/types.h>
@@ -47,5 +47,4 @@ void		delete_errors_elems(t_tetris *list)
       delete_error_elem(it);
       it = next;
     }
-
 }

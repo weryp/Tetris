@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Mar 12 01:29:03 2016 Paul Wery
-** Last update Sat Mar 12 23:59:41 2016 Paul Wery
+** Last update Sun Mar 13 19:21:12 2016 Victor Hoarau
 */
 
 #include <sys/types.h>
@@ -73,10 +73,7 @@ int	get_high_score(void)
     return (0);
   n = 0;
   while (n < 5 && buffer[n] != '\0')
-    {
-      i = (i * 10) + (buffer[n] - 48);
-      n += 1;
-    }
+    i = (i * 10) + (buffer[n++] - 48);
   close(fd);
   return (i);
 }

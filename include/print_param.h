@@ -5,11 +5,14 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Feb 29 15:54:56 2016 Paul Wery
-** Last update Sun Mar 13 18:42:09 2016 Victor Hoarau
+** Last update Sun Mar 13 19:14:29 2016 Victor Hoarau
 */
 
 #ifndef PARAM_H_
 # define PARAM_H_
+
+# define STATE_GAME_TOP_BOX "/------------------\\"
+# define STATE_GAME_M_BOX "|                  |"
 
 # include <ncurses.h>
 # include "tetris.h"
