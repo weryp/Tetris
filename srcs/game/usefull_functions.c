@@ -5,21 +5,8 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Feb 29 21:05:52 2016 Paul Wery
-** Last update Tue Mar  1 03:29:21 2016 Paul Wery
+** Last update Sat Mar 12 22:28:50 2016 Paul Wery
 */
-
-int	size_line(char *str, int n)
-{
-  int	i;
-
-  i = 0;
-  while (str[n] != '\n' && str[n] != '\0')
-    {
-      n += 1;
-      i += 1;
-    }
-  return (i);
-}
 
 int	my_strlen(char *str)
 {

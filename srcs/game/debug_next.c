@@ -5,12 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Mar  7 02:45:29 2016 Paul Wery
-** Last update Thu Mar 10 22:08:43 2016 Paul Wery
+** Last update Sun Mar 13 00:19:32 2016 Paul Wery
 */
 
-#include "tetris.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include "tetris.h"
 
 void	aff_name(char *name)
 {
@@ -28,6 +28,7 @@ void	delete_elem(t_tetris *elem)
 {
   elem->prev->next = elem->next;
   elem->next->prev = elem->prev;
+  free_content(elem);
   free(elem);
 }
 

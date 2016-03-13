@@ -5,10 +5,10 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 04:06:36 2016 Paul Wery
-** Last update Wed Mar  9 15:26:07 2016 Paul Wery
+** Last update Sun Mar 13 02:57:23 2016 Paul Wery
 */
 
-#include <curses.h>
+#include <ncurses.h>
 #include "tetris.h"
 
 int	key_drop(t_events *ev, char *param, char *content)
@@ -18,9 +18,11 @@ int	key_drop(t_events *ev, char *param, char *content)
   n = 0;
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
+  if (param[n] == '\0' && content == NULL)
+    return (-1);
   if (content != NULL && param[n] == '\0')
     copstr(ev->key_drop, content, 0);
-  else if (param[n] != '\0')
+  else
     {
       if (param[n] != '\0' && param[n + 1] != '\0')
 	n += 1;
@@ -28,8 +30,6 @@ int	key_drop(t_events *ev, char *param, char *content)
 	return (-1);
       copstr(ev->key_drop, param, n);
     }
-  else if (param[n] == '\0' && content != NULL)
-    return (-1);
   return (0);
 }
 
@@ -40,9 +40,11 @@ int	key_turn(t_events *ev, char *param, char *content)
   n = 0;
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
+  if (param[n] == '\0' && content == NULL)
+    return (-1);
   if (content != NULL && param[n] == '\0')
     copstr(ev->key_turn, content, 0);
-  else if (param[n] != '\0')
+  else
     {
       if (param[n] != '\0' && param[n + 1] != '\0')
 	n += 1;
@@ -50,8 +52,6 @@ int	key_turn(t_events *ev, char *param, char *content)
 	return (-1);
       copstr(ev->key_turn, param, n);
     }
-  else if (param[n] == '\0' && content != NULL)
-    return (-1);
   return (0);
 }
 
@@ -62,9 +62,11 @@ int	key_right(t_events *ev, char *param, char *content)
   n = 0;
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
+  if (param[n] == '\0' && content == NULL)
+    return (-1);
   if (content != NULL && param[n] == '\0')
     copstr(ev->key_right, content, 0);
-  else if (param[n] != '\0')
+  else
     {
       if (param[n] != '\0' && param[n + 1] != '\0')
 	n += 1;
@@ -72,8 +74,6 @@ int	key_right(t_events *ev, char *param, char *content)
 	return (-1);
       copstr(ev->key_right, param, n);
     }
-  else if (param[n] == '\0' && content != NULL)
-    return (-1);
   return (0);
 }
 
@@ -84,9 +84,11 @@ int	key_left(t_events *ev, char *param, char *content)
   n = 0;
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
+  if (param[n] == '\0' && content == NULL)
+    return (-1);
   if (content != NULL && param[n] == '\0')
     copstr(ev->key_left, content, 0);
-  else if (param[n] != '\0')
+  else
     {
       if (param[n] != '\0' && param[n + 1] != '\0')
 	n += 1;
@@ -94,8 +96,6 @@ int	key_left(t_events *ev, char *param, char *content)
 	return (-1);
       copstr(ev->key_left, param, n);
     }
-  else if (param[n] == '\0' && content != NULL)
-    return (-1);
   return (0);
 }
 

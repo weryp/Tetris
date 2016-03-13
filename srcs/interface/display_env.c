@@ -5,10 +5,10 @@
 ** Login   <hoarau_v@epitech.net>
 **
 ** Started on  Mon Feb 29 16:17:42 2016 victor hoarau
-** Last update Sat Mar 12 02:48:27 2016 Paul Wery
+** Last update Sat Mar 12 23:59:34 2016 Paul Wery
 */
 
-# include <curses.h>
+# include <ncurses.h>
 # include "print_param.h"
 
 void	print_nbr(int nb, int line, int col)

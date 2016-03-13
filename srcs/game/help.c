@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Mar  6 18:10:04 2016 Paul Wery
-** Last update Fri Mar 11 10:57:16 2016 Paul Wery
+** Last update Sun Mar 13 01:48:22 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -60,7 +60,7 @@ int	cstr(char *str, char *src)
   return (0);
 }
 
-void	help(int ac, char **av)
+void	help(int ac, char **av, int state)
 {
   int	n;
   int	ret;
@@ -74,10 +74,8 @@ void	help(int ac, char **av)
 	  ret = cstr(av[n], "--help");
 	  n += 1;
 	}
-      if (ret == 1)
+      if (ret == 1 || state == 1)
 	{
-	  endwin();
-	  ini_end_read(1);
 	  aff_help(av[0]);
 	  exit(0);
 	}

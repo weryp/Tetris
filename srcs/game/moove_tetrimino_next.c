@@ -5,12 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar  3 02:39:40 2016 Paul Wery
-** Last update Wed Mar  9 06:49:14 2016 Paul Wery
+** Last update Sun Mar 13 01:37:45 2016 Paul Wery
 */
 
 #include <stdlib.h>
 #include <unistd.h>
-#include <curses.h>
+#include <ncurses.h>
 #include "tetris.h"
 
 void	my_pause(t_events *ev, t_tetris *list, char **map)
@@ -30,7 +30,7 @@ void	my_pause(t_events *ev, t_tetris *list, char **map)
 	    {
 	      endwin();
 	      ini_end_read(1);
-	      free_all(list, map);
+	      free_all(list, map, ev->color_map);
 	      exit(0);
 	    }
 	}

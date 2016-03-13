@@ -5,10 +5,10 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 01:08:20 2016 Paul Wery
-** Last update Sat Mar 12 03:19:21 2016 Paul Wery
+** Last update Sun Mar 13 01:33:36 2016 Paul Wery
 */
 
-#include <curses.h>
+#include <ncurses.h>
 #include <unistd.h>
 #include "tetris.h"
 
@@ -25,14 +25,13 @@ void	aff_content_map(char **map, t_events *ev)
       i = 1;
       while (map[n][i] != '|' && map[n][i] != '\0')
         {
-	  attron(COLOR_PAIR(7));
+	  attron(COLOR_PAIR(ev->color_map[n][i]));
 	  c[0] = map[n][i];
 	  mvprintw((LINES / 2) - (ev->lines / 2 + 1) + n,
-                   (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w)
-				 / 2 - 22)
+                   (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w) / 2 - 22)
                    + i, c);
           i += 1;
-	  attroff(COLOR_PAIR(7));
+	  attroff(COLOR_PAIR(ev->color_map[n][i]));
         }
       n += 1;
     }
@@ -50,6 +49,7 @@ void	moove_lines(char **map, int n, t_events *ev)
       while (map[y][i] != '|' && map[y][i] != '\0')
 	{
 	  map[y + 1][i] = map[y][i];
+	  ev->color_map[y + 1][i] = ev->color_map[y][i];
 	  i += 1;
 	}
       y -= 1;

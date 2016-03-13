@@ -5,11 +5,11 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Mar  7 17:59:56 2016 Paul Wery
-** Last update Wed Mar  9 23:49:30 2016 Paul Wery
+** Last update Sun Mar 13 02:03:35 2016 Paul Wery
 */
 
 #include "tetris.h"
-#include <curses.h>
+#include <ncurses.h>
 #include <term.h>
 #include <unistd.h>
 
@@ -29,15 +29,15 @@ int	conv(char *str)
 
 }
 
-int		ini_term(t_term_num *num)
+int	ini_term(t_term_num *num)
 {
-  if (initscr() == NULL)
+  int	ret;
+
+  if (setupterm(NULL, 0, &ret) == -1)
     return (-1);
   num->kl = tigetstr("kcub1");
   num->kr = tigetstr("kcuf1");
   num->ku = tigetstr("kcuu1");
   num->kd = tigetstr("kcud1");
-  if (endwin() == ERR)
-    return (-1);
   return (0);
 }

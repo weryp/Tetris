@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Mar  7 14:12:52 2016 Paul Wery
-** Last update Wed Mar  9 06:49:55 2016 Paul Wery
+** Last update Sun Mar 13 01:38:08 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -55,7 +55,8 @@ void		free_content(t_tetris *it)
     }
 }
 
-void		free_all(t_tetris *list, char **map)
+void		free_all(t_tetris *list, char **map,
+			 char **color_map)
 {
   t_tetris	*it;
 
@@ -66,5 +67,6 @@ void		free_all(t_tetris *list, char **map)
       it = it->next;
     }
   free_map(map);
+  free_map(color_map);
   delete_list(&list);
 }

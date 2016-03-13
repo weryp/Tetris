@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Feb 29 23:29:59 2016 Paul Wery
-** Last update Fri Mar 11 17:05:50 2016 Paul Wery
+** Last update Sun Mar 13 03:03:37 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -46,13 +46,13 @@ int	load_obj(char *buffer, t_obj *obj)
   int	nb;
 
   if ((nb = get_params(buffer, 1)) == -1)
-    return (-1);
+    nb = 0;
   obj->width = nb;
   if ((nb = get_params(buffer, 2)) == -1)
-    return (-1);
+    nb = 0;
   obj->height = nb;
   if ((nb = get_params(buffer, 3)) == -1)
-    return (-1);
+    nb = 1;
   if (nb < 1 || nb > 7)
     obj->color = (rand() % 6) + 1;
   else

@@ -5,14 +5,14 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Mar 12 01:29:03 2016 Paul Wery
-** Last update Sat Mar 12 18:14:56 2016 Paul Wery
+** Last update Sat Mar 12 23:59:41 2016 Paul Wery
 */
 
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <curses.h>
+#include <ncurses.h>
 #include <time.h>
 #include "print_param.h"
 

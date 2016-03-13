@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Mar  7 02:18:09 2016 Paul Wery
-** Last update Fri Mar 11 23:58:21 2016 Paul Wery
+** Last update Sun Mar 13 02:24:09 2016 Paul Wery
 */
 
 #include <sys/ioctl.h>
@@ -32,6 +32,7 @@ void			wait_input(void)
   if (ioctl(0, TCGETS, &term) == -1)
     return ;
   term.c_lflag &= ~ICANON;
+  term.c_cc[VMIN] = 1;
   if (ioctl(0, TCSETS, &term) == -1)
     return ;
   if (read(0, key, 1) == -1)

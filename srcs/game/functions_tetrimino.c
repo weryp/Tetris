@@ -5,35 +5,36 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Mar  2 21:17:56 2016 Paul Wery
-** Last update Fri Mar 11 23:59:08 2016 Paul Wery
+** Last update Sun Mar 13 03:21:37 2016 Paul Wery
 */
 
-#include <curses.h>
+#include <ncurses.h>
 #include <stdlib.h>
 #include "tetris.h"
 
-void	clear_tetrimino(char **map, t_start_pos *pos, t_obj *obj)
+void	clear_tetrimino(char **map, t_start_pos *pos, t_obj *obj,
+			t_events *ev)
 {
-  int	x;
-  int	y;
-  int	n;
-  int	i;
+  t_co	c;
 
-  n = 0;
-  y = pos->start_y;
-  while (y < pos->end_y)
+  c.n = 0;
+  c.y = pos->start_y;
+  while (c.y < pos->end_y)
     {
-      i = 0;
-      x = pos->start_x;
-      while (x < pos->end_x)
+      c.i = 0;
+      c.x = pos->start_x;
+      while (c.x < pos->end_x)
 	{
-	  if (map[y][x] == '*' && obj->tetrimino[n][i] == '*')
-	    map[y][x] = ' ';
-	  x += 1;
-	  i += 1;
+	  if (map[c.y][c.x] == '*' && obj->tetrimino[c.n][c.i] == '*')
+	    {
+	      map[c.y][c.x] = ' ';
+	      ev->color_map[c.y][c.x] = 0;
+	    }
+	  c.x += 1;
+	  c.i += 1;
 	}
-      n += 1;
-      y += 1;
+      c.n += 1;
+      c.y += 1;
     }
 }
 
@@ -72,39 +73,39 @@ void	ini_pos(t_start_pos *pos, t_events *ev)
   pos->end_y = pos->start_y + ev->it->obj.height;
 }
 
-void	ini_events(t_events *ev, t_tetris *list)
+void		ini_events(t_events *ev, t_tetris *list)
 {
+  static int	turn = 0;
+
+  if (turn == 0)
+    ev->tet_next = 1;
   put_in_order(list);
   ev->nb_tet = 1;
   ev->it = list->next;
-  while (ev->it->next != list)
+  if (ev->it == list)
     {
-      ev->nb_tet += 1;
-      ev->it = ev->it->next;
-
+      ev->nb_tet = 0;
+      my_putstr("There is no valid tetrimino !\n");
     }
+  while (ev->it->next != list)
+      {
+	ev->nb_tet += 1;
+	ev->it = ev->it->next;
+      }
   ev->tet_start = 0;
   ev->tetrimino = 0;
-  ev->tet_next = 0;
   ev->form = 0;
   ev->key[0] = '\0';
   ev->time_end = 0;
   ev->height_time = 0;
+  turn = 1;
 }
 
-void	generate_tetrimino(t_events *ev)
+void		generate_tetrimino(t_events *ev)
 {
-  if (ev->tet_next == 0)
-    {
-      ev->tetrimino = rand() % (ev->nb_tet - 1) + 1;
-      if (ev->tetrimino < ev->nb_tet)
-	ev->tet_next = ev->tetrimino + 1;
-      else
-	ev->tet_next = ev->tetrimino - 1;
-    }
-  else if (ev->tetrimino == 0)
+  if (ev->tetrimino == 0)
     {
       ev->tetrimino = ev->tet_next;
-      ev->tet_next = rand() % (ev->nb_tet - 1) + 1;
+      ev->tet_next = rand() % (ev->nb_tet) + 1;
     }
 }

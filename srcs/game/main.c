@@ -5,10 +5,10 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 07:09:19 2016 Paul Wery
-** Last update Sat Mar 12 17:58:17 2016 Paul Wery
+** Last update Sun Mar 13 03:18:06 2016 Paul Wery
 */
 
-#include <curses.h>
+#include <ncurses.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "tetris.h"
@@ -73,19 +73,20 @@ char	**ini_tetris(t_events *ev)
   ini_colors();
   if ((map = create_aff_map(0, 0, ev)) == NULL)
     return (NULL);
+  if ((ev->color_map = create_aff_map(0, 0, ev)) == NULL)
+    return (NULL);
   aff_map(map, ev);
+  copstr(ev->key, "\0", 0);
   return (map);
 }
 
 void		start_ncurses(t_tetris *tet, t_events *ev,
-			      SCREEN *scr)
+			      SCREEN *scr, int end)
 {
   char		**map;
-  int		end;
 
-  end = 0;
-  copstr(ev->key, "\0", 0);
-  if ((map = ini_tetris(ev)) != NULL && ev->nb_tet > 0 && ev->cols >= ev->m_w)
+  if ((map = ini_tetris(ev)) != NULL && ev->nb_tet > 0 &&
+      ev->cols >= ev->m_w && ev->lines >= ev->m_h)
     while (cstr(ev->key, ev->key_quit) == 0)
       {
 	copstr(ev->key, "\0", 0);
@@ -101,35 +102,34 @@ void		start_ncurses(t_tetris *tet, t_events *ev,
       }
   save_high_score(ev->score);
   echo();
-  free_all(tet, map);
+  free_all(tet, map, ev->color_map);
   endwin();
   delscreen(scr);
 }
 
-int		main(int ac, char **av)
+int	main(int ac, char **av)
 {
-  t_tetris	*tet;
-  t_term_num	num;
-  t_events	ev;
-  SCREEN	*scr;
+  t_ini	i;
 
-  help(ac, av);
-  if ((tet = create_list()) == NULL)
+  help(ac, av, 0);
+  if ((i.tet = create_list()) == NULL)
     return (0);
-  if (ini_term(&num) == -1)
+  if (ini_term(&i.num) == -1)
     return (0);
-  if (load_tetriminos(tet) != 0)
+  if (load_tetriminos(i.tet) != 0)
     return (0);
-  ini_events(&ev, tet);
-  ini_game(&ev, &num);
-  load_params_tetris(&ev, av);
-  start_debug(&ev, tet);
-  if ((scr = newterm(NULL, stdout, stdin)) == NULL)
+  ini_events(&i.ev, i.tet);
+  ini_game(&i.ev, &i.num);
+  if (load_params_tetris(&i.ev, av, 1) == -1)
+    error_params(ac, av);
+  start_debug(&i.ev, i.tet);
+  delete_errors_elems(i.tet);
+  if ((i.scr = newterm(NULL, stdout, stdin)) == NULL)
     return (0);
-  error_size(&ev, scr, tet);
+  error_size(&i.ev, i.scr, i.tet);
   if (ini_end_read(0) == -1)
     return (0);
-  start_ncurses(tet, &ev, scr);
+  start_ncurses(i.tet, &i.ev, i.scr, 0);
   ini_end_read(1);
   return (0);
 }

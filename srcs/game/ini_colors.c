@@ -5,10 +5,10 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar  3 11:31:15 2016 Paul Wery
-** Last update Sat Mar 12 02:58:29 2016 Paul Wery
+** Last update Sun Mar 13 00:01:18 2016 Paul Wery
 */
 
-#include <curses.h>
+#include <ncurses.h>
 #include "tetris.h"
 
 void	clear_map(char **map, t_events *ev)

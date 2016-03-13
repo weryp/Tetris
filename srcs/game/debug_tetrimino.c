@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar 10 22:11:21 2016 Paul Wery
-** Last update Fri Mar 11 12:30:13 2016 Paul Wery
+** Last update Sun Mar 13 03:14:59 2016 Paul Wery
 */
 
 #include <sys/types.h>
@@ -18,8 +18,10 @@
 int	first_check(char *buffer)
 {
   int	n;
+  int	nb_params;
 
   n = 0;
+  nb_params = 0;
   while (buffer[n] != '\n' && buffer[n] != '\0')
     {
       if (buffer[n] == ' ' || buffer[n] == '\t' ||
@@ -27,8 +29,14 @@ int	first_check(char *buffer)
 	n = n;
       else
 	return (-1);
+      if ((buffer[n + 1] == ' ' || buffer[n + 1] == '\t'
+	   || buffer[n + 1] == '\n')
+	  && buffer[n] > 47 && buffer[n] < 58)
+	nb_params += 1;
       n += 1;
     }
+  if (nb_params != 3)
+    return (-1);
   return (n);
 }
 
@@ -112,11 +120,11 @@ void	aff_content(char *buffer, t_tetris *elem)
     my_putchar('\n');
 }
 
-void		debug_tetrimino(t_tetris *elem)
+void	debug_tetrimino(t_tetris *elem)
 {
-  char		*path;
-  char		*buffer;
-  int		fd;
+  char	*path;
+  char	*buffer;
+  int	fd;
 
   if ((path = my_path(elem->name, "tetriminos/")) == NULL)
     return ;

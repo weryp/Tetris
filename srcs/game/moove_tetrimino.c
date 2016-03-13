@@ -5,12 +5,12 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Wed Mar  2 16:40:24 2016 Paul Wery
-** Last update Fri Mar 11 17:54:19 2016 Paul Wery
+** Last update Sun Mar 13 01:28:15 2016 Paul Wery
 */
 
 #define _POSIX_SOURCE
 #define _BSD_SOURCE
-#include <curses.h>
+#include <ncurses.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "tetris.h"
@@ -18,26 +18,26 @@
 int	change_form(char **map, t_tetris *it,
 		    t_start_pos *pos, t_events *ev)
 {
-  int	x;
-  int	y;
-  int	n;
-  int	i;
+  t_co	c;
 
-  n = 0;
-  y = pos->start_y;
-  while (y < pos->end_y)
+  c.n = 0;
+  c.y = pos->start_y;
+  while (c.y < pos->end_y)
     {
-      i = 0;
-      x = pos->start_x;
-      while (x < pos->end_x)
+      c.i = 0;
+      c.x = pos->start_x;
+      while (c.x < pos->end_x)
 	{
-	  if (it->obj.tetrimino[n][i] == '*')
-	    map[y][x] = '*';
-	  i += 1;
-	  x += 1;
+	  if (it->obj.tetrimino[c.n][c.i] == '*')
+	    {
+	      map[c.y][c.x] = '*';
+	      ev->color_map[c.y][c.x] = it->obj.color;
+	    }
+	  c.i += 1;
+	  c.x += 1;
 	}
-      n += 1;
-      y += 1;
+      c.n += 1;
+      c.y += 1;
     }
   clear_map(map, ev);
   aff_map_color(map, it, pos, ev);
@@ -85,7 +85,7 @@ void		event_tetrimino_next(char **map, t_events *ev,
   pos.end_y = ev->pos.end_y + ev->height_time;
   check_border(&pos, ev);
   change_form(map, ev->it, &pos, ev);
-  clear_tetrimino(map, &pos, &ev->it->obj);
+  clear_tetrimino(map, &pos, &ev->it->obj, ev);
   ev->tet_start = 1;
   time_event(map, ev, pos, list);
 }
@@ -93,7 +93,7 @@ void		event_tetrimino_next(char **map, t_events *ev,
 void	event_tetrimino(char **map, t_events *ev,
 			t_tetris *list)
 {
-  clear_tetrimino(map, &ev->pos, &ev->it->obj);
+  clear_tetrimino(map, &ev->pos, &ev->it->obj, ev);
   if (cstr(ev->key, ev->key_turn) == 1 && check_change_form(ev, map) == 0)
     {
       ev->form += 1;
@@ -105,7 +105,7 @@ void	event_tetrimino(char **map, t_events *ev,
     }
   if (cstr(ev->key, ev->key_left) == 1 || cstr(ev->key, ev->key_right) == 1)
     {
-      clear_tetrimino(map, &ev->pos, &ev->it->obj);
+      clear_tetrimino(map, &ev->pos, &ev->it->obj, ev);
       if (cstr(ev->key, ev->key_left) == 1 && check_side_left(ev, map) == 0)
 	{
 	  ev->pos.start_x -= 1;
@@ -124,8 +124,6 @@ int		moove_tetrimino(char **map, t_tetris *list,
 				t_events *ev, int turn)
 {
   ev->it = list->next;
-  /*if (ev->tetrimino == 0)
-    ev->tetrimino = rand() % (ev->nb_tet - 1) + 1;*/
   while (turn < ev->tetrimino)
     {
       turn += 1;

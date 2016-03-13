@@ -5,10 +5,10 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 04:48:27 2016 Paul Wery
-** Last update Fri Mar 11 12:26:51 2016 Paul Wery
+** Last update Sun Mar 13 02:57:59 2016 Paul Wery
 */
 
-#include <curses.h>
+#include <ncurses.h>
 #include "tetris.h"
 
 int	get_nb(char *str, int param, int n)
@@ -71,9 +71,11 @@ int	key_pause(t_events *ev, char *param, char *content)
   n = 0;
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
+  if (param[n] == '\0' && content == NULL)
+    return (-1);
   if (content != NULL && param[n] == '\0')
     copstr(ev->key_pause, content, 0);
-  else if (param[n] != '\0')
+  else
     {
       if (param[n] != '\0' && param[n + 1] != '\0')
 	n += 1;
@@ -81,8 +83,6 @@ int	key_pause(t_events *ev, char *param, char *content)
 	return (-1);
       copstr(ev->key_pause, param, n);
     }
-  else if (param[n] == '\0' && content != NULL)
-    return (-1);
   return (0);
 }
 
@@ -93,9 +93,11 @@ int	key_quit(t_events *ev, char *param, char *content)
   n = 0;
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
+  if (param[n] == '\0' && content == NULL)
+    return (-1);
   if (content != NULL && param[n] == '\0')
     copstr(ev->key_quit, content, 0);
-  else if (param[n] != '\0')
+  else
     {
       if (param[n] != '\0' && param[n + 1] != '\0')
 	n += 1;
@@ -103,7 +105,5 @@ int	key_quit(t_events *ev, char *param, char *content)
 	return (-1);
       copstr(ev->key_quit, param, n);
     }
-  else if (param[n] == '\0' && content != NULL)
-    return (-1);
   return (0);
 }

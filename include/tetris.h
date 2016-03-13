@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Sat Mar 12 00:56:15 2016 Paul Wery
+** Last update Sun Mar 13 01:57:47 2016 Paul Wery
 */
 
 #ifndef TETRIS_H_
@@ -14,7 +14,7 @@
 # define UNUSED __attribute__((unused))
 
 # include <sys/stat.h>
-# include <curses.h>
+# include <ncurses.h>
 
 typedef struct dirent t_dir;
 typedef struct stat t_stat;
@@ -50,7 +50,6 @@ typedef struct	s_events
 {
   t_tetris	*it;
   t_start_pos	pos;
-  char		key[5];
   int		form;
   int		nb_tet;
   int		tet_start;
@@ -60,6 +59,7 @@ typedef struct	s_events
   int		height_time;
   float		level;
   int		score;
+  char		key[5];
   char		key_left[5];
   char		key_right[5];
   char		key_turn[5];
@@ -71,14 +71,17 @@ typedef struct	s_events
   int		hide_tet;
   int		debug;
   int		m_w;
+  int		m_h;
+  char		**color_map;
 }		t_events;
 
-typedef struct	s_score
+typedef struct	s_co
 {
-  int		time;
-  int		best_player;
-  int		level;
-}		t_score;
+  int		x;
+  int		y;
+  int		n;
+  int		i;
+}		t_co;
 
 typedef struct	s_term_num
 {
@@ -87,6 +90,14 @@ typedef struct	s_term_num
   char		*ku;
   char		*kd;
 }		t_term_num;
+
+typedef struct	s_ini
+{
+  t_tetris	*tet;
+  t_term_num	num;
+  t_events	ev;
+  SCREEN	*scr;
+}		t_ini;
 
 int		get_params(char *buffer, int param);
 void		cop_string(char *name, char *src);
@@ -103,7 +114,8 @@ int		create_others_forms(t_tetris *list, t_obj *obj);
 void		aff_map(char **map, t_events *ev);
 void		ini_pos(t_start_pos *pos, t_events *ev);
 int		check_moove(char **map, t_tetris *it, t_start_pos *pos);
-void		clear_tetrimino(char **map, t_start_pos *pos, t_obj *obj);
+void		clear_tetrimino(char **map, t_start_pos *pos, t_obj *obj,
+				t_events *ev);
 int		moove_tetrimino(char **map, t_tetris *list,
 				t_events *ev, int turn);
 void		ini_events(t_events *ev, t_tetris *list);
@@ -135,12 +147,12 @@ int		key_pause(t_events *ev, char *param, char *content);
 int		key_quit(t_events *ev, char *param, char *content);
 int		get_nb(char *str, int param, int n);
 void		ini_game(t_events *ev, t_term_num *num);
-void		load_params_tetris(t_events *ev, char **av);
+int		load_params_tetris(t_events *ev, char **av, int n);
 int		opt(char *str, char *src_one,
 		    char *src_two, char *src_three);
-void		help(int ac, char **av);
+void		help(int ac, char **av, int state);
 void		my_putstr(char *str);
-void		free_all(t_tetris *list, char **map);
+void		free_all(t_tetris *list, char **map, char **color_map);
 int		ini_term(t_term_num *num);
 int		cstr(char *str, char *src);
 void		copstr(char *dest, char *str, int n);
@@ -150,12 +162,17 @@ char		*alloc_buffer(int fd, char *file);
 void		put_in_order(t_tetris *list);
 void		aff_name(char *name);
 void		delete_elem(t_tetris *elem);
+int		check_tet(char *buffer, t_tetris *elem,
+			  int n, int nb_lines);
 void		debug_tetrimino(t_tetris *elem);
+void		delete_errors_elems(t_tetris *list);
 char		*my_path(char *file, char *tet);
 void		my_putchar(char c);
 void		my_putnbr(int nb);
 void		str_debug(char *str);
 void		generate_tetrimino(t_events *ev);
+void		free_content(t_tetris *it);
+void		error_params(int ac, char **av);
 
 # include "print_param.h"
 

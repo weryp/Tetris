@@ -5,12 +5,23 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar  3 10:44:40 2016 Paul Wery
-** Last update Sat Mar 12 03:24:17 2016 Paul Wery
+** Last update Sun Mar 13 03:20:25 2016 Paul Wery
 */
 
 #include <stdlib.h>
-#include <curses.h>
+#include <ncurses.h>
 #include "tetris.h"
+
+void	ini_key(char *key)
+{
+  int	n;
+
+  while (n < 5)
+    {
+      key[n] = '\0';
+      n += 1;
+    }
+}
 
 void	str_debug(char *str)
 {
@@ -35,10 +46,13 @@ int		error_size(t_events *ev, SCREEN *scr, t_tetris *list)
 
   it = list->next;
   ev->m_w = 0;
+  ev->m_h = 0;
   while (it != list)
     {
       if (it->obj.width > ev->m_w)
 	ev->m_w = it->obj.width;
+      if (it->obj.height > ev->m_h)
+	ev->m_h = it->obj.height;
       it = it->next;
     }
   if (LINES < (ev->lines + 14) || COLS < (ev->cols + 14 + 26 + ev->m_w)
@@ -52,4 +66,10 @@ int		error_size(t_events *ev, SCREEN *scr, t_tetris *list)
       exit(0);
     }
   return (0);
+}
+
+void	error_params(int ac, char **av)
+{
+  my_putstr("Invalid arguments !\n");
+  help(ac, av, 1);
 }

@@ -16,8 +16,9 @@ check_change_form.c:  pos.end_x = ev->pos.start_x + it->obj.width;
 check_change_form.c:  pos.start_y = ev->pos.start_y + ev->height_time;
 check_change_form.c:  pos.end_y = ev->pos.start_y + it->obj.height + ev->height_time;
 clean_line.c:	  mvprintw((LINES / 2) - (ev->lines / 2 + 1) + n,
-clean_line.c:                   (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
+clean_line.c:                   (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w)
 clean_line.c:  ev->level += 0.1;
+clean_line.c:  ev->score += 50 * ev->level;
 debug.c:  if (ev->hide_tet == 0)
 debug.c:  my_putnbr(ev->level);
 debug.c:  my_putnbr(ev->lines);
@@ -32,10 +33,13 @@ debug.c:      str_debug(ev->key_pause);
 debug_next.c:  elem->prev->next = elem->next;
 debug_next.c:  elem_one->prev->next = elem_two;
 end_game.c:	  mvprintw((LINES / 2) - (ev->lines / 2 + 1) + n,
-end_game.c:                   (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
-end_game.c:  mvprintw((LINES / 2), (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
-end_game.c:	   + (ev->cols / 2 - 3), "END GAME");
-errors_functions.c:  if (LINES < (ev->lines + 2) || COLS < (ev->cols + 2 + 34))
+end_game.c:                   (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w)
+end_game.c:  mvprintw((LINES / 2), (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w)
+end_game.c:	   + (ev->cols / 2 - 3), "GAME OVER");
+errors_functions.c:  ev->m_w = 0;
+errors_functions.c:      if (it->obj.width > ev->m_w)
+errors_functions.c:	ev->m_w = it->obj.width;
+errors_functions.c:  if (LINES < (ev->lines + 14) || COLS < (ev->cols + 14 + 26 + ev->m_w)
 functions_tetrimino.c:  pos->start_x = (ev->cols / 2) - (ev->it->obj.width / 2);
 functions_tetrimino.c:  pos->end_x = pos->start_x + ev->it->obj.width;
 functions_tetrimino.c:  pos->end_y = pos->start_y + ev->it->obj.height;
@@ -46,14 +50,27 @@ functions_tetrimino.c:      ev->nb_tet += 1;
 functions_tetrimino.c:      ev->it = ev->it->next;
 functions_tetrimino.c:  ev->tet_start = 0;
 functions_tetrimino.c:  ev->tetrimino = 0;
+functions_tetrimino.c:  ev->tet_next = 0;
 functions_tetrimino.c:  ev->form = 0;
 functions_tetrimino.c:  ev->key[0] = '\0';
 functions_tetrimino.c:  ev->time_end = 0;
 functions_tetrimino.c:  ev->height_time = 0;
+functions_tetrimino.c:  if (ev->tet_next == 0)
+functions_tetrimino.c:      ev->tetrimino = rand() % ev->nb_tet + 1;
+functions_tetrimino.c:      if (ev->tetrimino < ev->nb_tet)
+functions_tetrimino.c:	ev->tet_next = ev->tetrimino + 1;
+functions_tetrimino.c:	ev->tet_next = ev->tetrimino - 1;
+functions_tetrimino.c:  /*  else if (ev->tetrimino == 0)
+functions_tetrimino.c:      ev->tetrimino = ev->tet_next;
+functions_tetrimino.c:      ev->tet_next = rand() % ev->nb_tet + 1;
+functions_tetrimino.c:      if (ev->tet_next < ev->nb_tet)
+functions_tetrimino.c:	ev->tet_next = rand() % ev->tet_next + 1;
+functions_tetrimino.c:      else if (ev->tet_next > 1)
+functions_tetrimino.c:	ev->tet_next -= 1;
 ini_colors.c:	    mvprintw((LINES / 2) - (ev->lines / 2 + 1) + n,
-ini_colors.c:		     (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
+ini_colors.c:		     (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w)
 ini_colors.c:	    mvprintw((LINES / 2) - (ev->lines / 2 + 1) + y,
-ini_colors.c:		     (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
+ini_colors.c:		     (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w) / 2 - 22)
 ini_game.c:  ev->debug = 1;
 ini_game.c:  ev->level = 1;
 ini_game.c:  copstr(ev->key_left, num->kl, 0);
@@ -66,8 +83,10 @@ ini_game.c:  ev->lines = 20;
 ini_game.c:  ev->cols = 10;
 ini_game.c:  ev->hide_tet = 0;
 ini_game.c:  ev->debug = 0;
+ini_game.c:  ev->score = 0;
 main.c:	  mvprintw((LINES / 2) - (ev->lines / 2 + 1) + n,
-main.c:		   (COLS / 2) - ((ev->cols + 2 + 34) / 2 - 22)
+main.c:		   (COLS / 2) - ((ev->cols + 2 + 26 +
+main.c:				  ev->m_w) / 2 - 22)
 main.c:  if ((map = malloc((ev->lines + 3) * sizeof(char*))) == NULL)
 main.c:  while (n < (ev->lines + 2))
 main.c:      if ((map[n] = malloc(ev->cols + 3)) == NULL)
@@ -75,9 +94,11 @@ main.c:      while (i < (ev->cols + 2))
 main.c:	  if (n == 0 || n == (ev->lines + 1))
 main.c:	  else if (i == 0 || i == (ev->cols + 1))
 main.c:  copstr(ev->key, "\0", 0);
+main.c:  if ((map = ini_tetris(ev)) != NULL && ev->nb_tet > 0 && ev->cols >= ev->m_w)
 main.c:    while (cstr(ev->key, ev->key_quit) == 0)
 main.c:	copstr(ev->key, "\0", 0);
 main.c:	if (read(0, ev->key, 4) == -1)
+main.c:  save_high_score(ev->score);
 moove_tetrimino.c:  ev->time_end += 1;
 moove_tetrimino.c:  my_time = 5000 - (((int)ev->level - 1) * 200);
 moove_tetrimino.c:  if (ev->time_end == my_time)
@@ -111,8 +132,6 @@ moove_tetrimino.c:      if (cstr(ev->key, ev->key_right) == 1 && check_side_righ
 moove_tetrimino.c:	  ev->pos.start_x += 1;
 moove_tetrimino.c:	  ev->pos.end_x += 1;
 moove_tetrimino.c:  ev->it = list->next;
-moove_tetrimino.c:  if (ev->tetrimino == 0)
-moove_tetrimino.c:    ev->tetrimino = rand() % (ev->nb_tet - 1) + 1;
 moove_tetrimino.c:  while (turn < ev->tetrimino)
 moove_tetrimino.c:      ev->it = ev->it->next;
 moove_tetrimino.c:  while (turn < ev->form)

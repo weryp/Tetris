@@ -5,10 +5,10 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 03:25:34 2016 Paul Wery
-** Last update Sat Mar 12 02:59:05 2016 Paul Wery
+** Last update Sun Mar 13 00:00:51 2016 Paul Wery
 */
 
-#include <curses.h>
+#include <ncurses.h>
 #include "tetris.h"
 
 void	end_message(char **map, t_events *ev)
@@ -30,9 +30,12 @@ void	end_message(char **map, t_events *ev)
         }
       n += 1;
     }
+  init_pair(1, COLOR_RED, COLOR_BLACK);
+  attron(COLOR_PAIR(1));
   mvprintw((LINES / 2), (COLS / 2) - ((ev->cols + 2 + 26 + ev->m_w)
 				      / 2 - 22)
-	   + (ev->cols / 2 - 3), "END GAME");
+	   + (ev->cols / 2 - 3), "GAME OVER");
+  attroff(COLOR_PAIR(1));
 }
 
 int	end_game(char **map, t_start_pos *pos, t_obj *obj)
