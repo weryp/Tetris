@@ -1,11 +1,11 @@
 /*
 ** get_title.c for tetris in /home/hoarau/Code/PSU/PSU_2015_tetris
-** 
+**
 ** Made by hoarau_v
 ** Login   <hoarau_v@epitech.net>
-** 
+**
 ** Started on  Sat Mar 12 17:41:33 2016 hoarau_v
-** Last update Sat Mar 12 17:41:34 2016 hoarau_v
+** Last update Sun Mar 13 23:01:57 2016 Paul Wery
 */
 
 # include "get_next_line.h"
@@ -31,5 +31,6 @@ char	*get_title(char *path)
       title = my_stracat(title, "\n");
       free(tmp);
     }
+  close(fd);
   return (title);
 }
