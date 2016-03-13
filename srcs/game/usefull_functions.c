@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Feb 29 21:05:52 2016 Paul Wery
-** Last update Sun Mar 13 17:32:26 2016 Victor Hoarau
+** Last update Sun Mar 13 19:33:37 2016 Paul Wery
 */
 
 int	my_strlen(char *str)

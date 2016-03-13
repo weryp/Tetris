@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 03:25:34 2016 Paul Wery
-** Last update Sun Mar 13 19:01:45 2016 Victor Hoarau
+** Last update Sun Mar 13 19:54:00 2016 Paul Wery
 */
 
 #include <ncurses.h>
@@ -54,7 +54,7 @@ int	end_game(char **map, t_start_pos *pos, t_obj *obj)
       while (x < pos->end_x)
         {
           if (map[y][x] == '*' && obj->tetrimino[n][i] == '*')
-            return (-1);;
+            return (-1);
           x += 1;
           i += 1;
         }
