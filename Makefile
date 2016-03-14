@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sun Feb 28 06:27:14 2016 Paul Wery
-## Last update Sun Mar 13 18:19:49 2016 Victor Hoarau
+## Last update Mon Mar 14 13:43:13 2016 Paul Wery
 ##
 
 NAME	=	tetris
@@ -59,14 +59,9 @@ SRCS	=	srcs/game/main.c \
 
 
 $(NAME)	:	$(OBJS)
-		@$(CC) $(OBJS) -o $(NAME) -lncurses
-		@(aplay ./.Makedata/.1punch_op > /dev/null 2> /dev/null || echo "Tune Failed") &
-		@(cat ./.Makedata/.punch.txt 2> /dev/null || echo "Image Failed")
+		$(CC) $(OBJS) -o $(NAME) -lncurses
 
 all	:	$(NAME)
-
-tune	:
-		@(aplay ./.Makedata/.tetris > /dev/null 2> /dev/null || echo "Tune Failed") &
 
 clean	:
 		$(RM) $(OBJS)
@@ -77,5 +72,3 @@ fclean	:	clean
 re	:	fclean all
 
 .PHONY	:	all clean fclean re
-
-.SILENT	:	$(OBJS)
