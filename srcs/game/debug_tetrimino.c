@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar 10 22:11:21 2016 Paul Wery
-** Last update Sun Mar 13 03:14:59 2016 Paul Wery
+** Last update Tue Mar 15 22:01:13 2016 Paul Wery
 */
 
 #include <sys/types.h>
@@ -55,6 +55,8 @@ int	second_check(char *buffer, int n, t_tetris *elem)
 	  i += 1;
 	  n += 1;
 	}
+      while (buffer[n - 1] == ' ' && i > 0)
+	i -= 1;
       if (i > elem->obj.width)
 	return (-1);
       if (i == elem->obj.width)
@@ -95,11 +97,8 @@ int	check_tet(char *buffer, t_tetris *elem,
   return (0);
 }
 
-void	aff_content(char *buffer, t_tetris *elem)
+void	aff_content(char *buffer, t_tetris *elem, int n)
 {
-  int	n;
-
-  n = 0;
   my_putstr("Size ");
   my_putnbr(elem->obj.width);
   my_putstr("*");
@@ -113,7 +112,8 @@ void	aff_content(char *buffer, t_tetris *elem)
     n += 1;
   while (buffer[n] != '\0')
     {
-      my_putchar(buffer[n]);
+      if (check_line(buffer, n) == 0)
+	my_putchar(buffer[n]);
       n += 1;
     }
   if (buffer[n - 1] != '\n')
@@ -138,7 +138,7 @@ void	debug_tetrimino(t_tetris *elem)
       delete_elem(elem);
     }
   else
-    aff_content(buffer, elem);
+    aff_content(buffer, elem, 0);
   free(path);
   free(buffer);
   close(fd);

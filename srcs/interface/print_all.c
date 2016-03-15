@@ -5,7 +5,7 @@
 ** Login   <hoarau_v@epitech.net>
 **
 ** Started on  Sat Mar  5 20:11:47 2016 Victor Hoarau
-** Last update Sun Mar 13 22:46:43 2016 Paul Wery
+** Last update Tue Mar 15 22:32:10 2016 Paul Wery
 */
 
 # include "print_param.h"
@@ -18,7 +18,8 @@ int		print_all(t_display_env *data, char *title)
   if (turn == 0)
     print_title(title);
   print_state_game(data);
-  print_next_tetrimino(data);
+  if (data->ev->hide_tet == 0)
+    print_next_tetrimino(data);
   attroff(COLOR_PAIR(6));
   turn = 1;
   return (0);
