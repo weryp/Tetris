@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Thu Mar  3 10:44:40 2016 Paul Wery
-** Last update Sun Mar 13 19:35:07 2016 Paul Wery
+** Last update Tue Mar 15 09:12:23 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -16,7 +16,7 @@ void	ini_key(char *key)
 {
   int	n;
 
-  while (n < 5)
+  while (n < 6)
     {
       key[n] = '\0';
       n += 1;

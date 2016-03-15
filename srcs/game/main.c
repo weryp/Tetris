@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 07:09:19 2016 Paul Wery
-** Last update Sun Mar 13 23:08:43 2016 Paul Wery
+** Last update Mon Mar 14 14:00:31 2016 Paul Wery
 */
 
 #include <ncurses.h>
@@ -96,10 +96,11 @@ void	start_ncurses(t_tetris *tet, t_events *ev,
 	  return ;
 	generate_tetrimino(ev);
 	if (end == 0)
+	  link_with_game(ev, tet, title);
+	if (end == 0)
 	  if ((end = moove_tetrimino(map, tet, ev, 1)) == -1)
 	    end_message(map, ev);
-	if (end == 0)
-	  link_with_game(ev, tet, title);
+
 	refresh();
       }
   save_high_score(ev->score);

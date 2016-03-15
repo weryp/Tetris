@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Sun Mar 13 18:22:44 2016 Victor Hoarau
+** Last update Tue Mar 15 09:10:14 2016 Paul Wery
 */
 
 #ifndef TETRIS_H_
@@ -59,13 +59,13 @@ typedef struct	s_events
   int		height_time;
   float		level;
   int		score;
-  char		key[5];
-  char		key_left[5];
-  char		key_right[5];
-  char		key_turn[5];
-  char		key_drop[5];
-  char		key_quit[5];
-  char		key_pause[5];
+  char		key[6];
+  char		key_left[6];
+  char		key_right[6];
+  char		key_turn[6];
+  char		key_drop[6];
+  char		key_quit[6];
+  char		key_pause[6];
   int		lines;
   int		cols;
   int		hide_tet;
