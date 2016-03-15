@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sun Feb 28 06:27:14 2016 Paul Wery
-## Last update Mon Mar 14 13:43:13 2016 Paul Wery
+## Last update Tue Mar 15 20:15:55 2016 Paul Wery
 ##
 
 NAME	=	tetris
@@ -45,6 +45,7 @@ SRCS	=	srcs/game/main.c \
 		srcs/game/debug_next.c \
 		srcs/game/debug_tetrimino.c \
 		srcs/game/delete_errors_elems.c \
+		srcs/game/check_fonc.c \
 		srcs/interface/link_with_game.c \
 		srcs/interface/print_all.c \
 		srcs/interface/display_env.c \
@@ -55,8 +56,6 @@ SRCS	=	srcs/game/main.c \
 		srcs/interface/get_title/get_title.c \
 		srcs/interface/get_title/get_next_line.c \
 		srcs/interface/get_title/my_stracat.c
-
-
 
 $(NAME)	:	$(OBJS)
 		$(CC) $(OBJS) -o $(NAME) -lncurses

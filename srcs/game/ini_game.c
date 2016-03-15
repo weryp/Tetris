@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 03:56:19 2016 Paul Wery
-** Last update Sun Mar 13 03:00:14 2016 Paul Wery
+** Last update Tue Mar 15 20:13:08 2016 Paul Wery
 */
 
 #include "tetris.h"
@@ -49,6 +49,8 @@ int	load_params_tetris(t_events *ev, char **av, int n)
       if (fonc != -1)
 	if ((*params[fonc])(ev, av[n], av[n + 1]) == -1)
 	  return (-1);
+      if (check_fonc(fonc, av, n) == -1)
+	return (-1);
       n += 1;
     }
   return (0);

@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Tue Mar 15 09:10:14 2016 Paul Wery
+** Last update Tue Mar 15 20:15:03 2016 Paul Wery
 */
 
 #ifndef TETRIS_H_
@@ -173,6 +173,7 @@ void		str_debug(char *str);
 void		generate_tetrimino(t_events *ev);
 void		free_content(t_tetris *it);
 void		error_params(int ac, char **av);
+int		check_fonc(int fonc, char **av, int n);
 
 # include "print_param.h"
 
