@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Tue Mar 15 20:13:20 2016 Paul Wery
-** Last update Tue Mar 15 23:03:28 2016 Paul Wery
+** Last update Tue Mar 15 23:16:02 2016 Paul Wery
 */
 
 #include <unistd.h>
@@ -25,9 +25,11 @@ int	check_line(char *buffer, int n)
 int	check_fonc(int fonc, char **av, int n)
 {
   if ((fonc == -1 && av[n][0] == '-' && av[n][1] != '\0') ||
-      (n > 1 && fonc == -1 && av[n][0] == '-' && av[n][1] == '\0'
-       && ((av[n - 1][0] == '-' && av[n - 1][1] == '-') ||
-	   av[n - 1][0] != '-')) ||
+      (n == 1 && fonc == - 1 && av[n][0] == '-' && av[n][1] == '\0')
+      || (n > 1 && fonc == -1 && av[n][0] == '-' && av[n][1] == '\0'
+	  && ((av[n - 1][0] == '-' && (av[n - 1][1] == '-' ||
+				       av[n - 1][1] == '\0')) ||
+	      av[n - 1][0] != '-')) ||
       (n > 1 && av[n][0] != '-' && av[n - 1][0] != '-')
       || av[1][0] != '-' ||
       (av[n][0] == '-' && av[n][1] != '-' && av[n][1] != '\0'
