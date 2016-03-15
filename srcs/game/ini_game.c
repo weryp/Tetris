@@ -5,15 +5,21 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 03:56:19 2016 Paul Wery
-** Last update Tue Mar 15 20:13:08 2016 Paul Wery
+** Last update Tue Mar 15 23:31:29 2016 Paul Wery
 */
 
 #include "tetris.h"
 #include <unistd.h>
 
-int	debug(t_events *ev, char *param UNUSED, char *content UNUSED)
+int		debug(t_events *ev, char *param UNUSED,
+		      char *content UNUSED)
 {
+  static int	turn = 0;
+
+  if (turn == 1)
+    return (-1);
   ev->debug = 1;
+  turn = 1;
   return (0);
 }
 

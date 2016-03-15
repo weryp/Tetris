@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Fri Mar  4 04:48:27 2016 Paul Wery
-** Last update Sun Mar 13 02:57:59 2016 Paul Wery
+** Last update Tue Mar 15 23:32:28 2016 Paul Wery
 */
 
 #include <ncurses.h>
@@ -39,19 +39,29 @@ int	get_nb(char *str, int param, int n)
   return (i);
 }
 
-int	hide_tet(t_events *ev, char *param UNUSED, char *content UNUSED)
+int		hide_tet(t_events *ev, char *param UNUSED,
+			 char *content UNUSED)
 {
+  static int	turn = 0;
+
+  if (turn == 1)
+    return (-1);
   ev->hide_tet = 1;
+  turn = 1;
   return (0);
 }
 
-int	size_map(t_events *ev, char *param, char *content UNUSED)
+int		size_map(t_events *ev, char *param,
+			 char *content UNUSED)
 {
-  int	n;
-  int	ret_one;
-  int	ret_two;
+  static int	turn = 0;
+  int		n;
+  int		ret_one;
+  int		ret_two;
 
   n = 0;
+  if (turn == 1)
+    return (-1);
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
   ret_one = get_nb(param, 1, n + 1);
@@ -61,14 +71,18 @@ int	size_map(t_events *ev, char *param, char *content UNUSED)
     return (-1);
   ev->lines = ret_one;
   ev->cols = ret_two;
+  turn = 1;
   return (0);
 }
 
-int	key_pause(t_events *ev, char *param, char *content)
+int		key_pause(t_events *ev, char *param, char *content)
 {
-  int	n;
+  static int	turn = 0;
+  int		n;
 
   n = 0;
+  if (turn == 1)
+    return (-1);
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
   if (param[n] == '\0' && content == NULL)
@@ -83,14 +97,18 @@ int	key_pause(t_events *ev, char *param, char *content)
 	return (-1);
       copstr(ev->key_pause, param, n);
     }
+  turn = 1;
   return (0);
 }
 
-int	key_quit(t_events *ev, char *param, char *content)
+int		key_quit(t_events *ev, char *param, char *content)
 {
-  int	n;
+  static int	turn = 0;
+  int		n;
 
   n = 0;
+  if (turn == 1)
+    return (-1);
   while (param[n] != '=' && param[n] != '\0')
     n += 1;
   if (param[n] == '\0' && content == NULL)
@@ -105,5 +123,6 @@ int	key_quit(t_events *ev, char *param, char *content)
 	return (-1);
       copstr(ev->key_quit, param, n);
     }
+  turn = 1;
   return (0);
 }
