@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Tue Mar 15 21:58:13 2016 Paul Wery
+** Last update Sun Mar 20 14:34:23 2016 Paul Wery
 */
 
 #ifndef TETRIS_H_
@@ -175,6 +175,7 @@ void		free_content(t_tetris *it);
 void		error_params(int ac, char **av);
 int		check_fonc(int fonc, char **av, int n);
 int		check_line(char *buffer, int n);
+char		*realloc_w(char *str, int new_size);
 
 # include "print_param.h"
 

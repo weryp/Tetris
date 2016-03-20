@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sun Feb 28 06:27:14 2016 Paul Wery
-## Last update Tue Mar 15 20:15:55 2016 Paul Wery
+## Last update Sun Mar 20 14:33:52 2016 Paul Wery
 ##
 
 NAME	=	tetris
@@ -46,6 +46,7 @@ SRCS	=	srcs/game/main.c \
 		srcs/game/debug_tetrimino.c \
 		srcs/game/delete_errors_elems.c \
 		srcs/game/check_fonc.c \
+		srcs/game/my_realloc.c \
 		srcs/interface/link_with_game.c \
 		srcs/interface/print_all.c \
 		srcs/interface/display_env.c \

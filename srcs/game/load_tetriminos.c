@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Feb 29 21:13:21 2016 Paul Wery
-** Last update Fri Mar 11 02:33:47 2016 Paul Wery
+** Last update Sun Mar 20 14:34:36 2016 Paul Wery
 */
 
 #include <sys/types.h>
@@ -19,15 +19,14 @@ char		*alloc_buffer(int fd, char *file)
 {
   char		*buffer;
   t_stat	my_stat;
-  int		size;
 
   stat(file, &my_stat);
   if ((buffer = malloc((int)my_stat.st_size)) == NULL)
     return (NULL);
   if (read(fd, buffer, (int)my_stat.st_size) == -1)
     return (NULL);
-  size = (int)my_stat.st_size;
-  buffer[size - 1] = '\0';
+  if ((buffer = realloc_w(buffer, (int)my_stat.st_size + 1)) == NULL)
+    return (NULL);
   return (buffer);
 }
 
