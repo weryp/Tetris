@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Mon Mar  7 02:45:29 2016 Paul Wery
-** Last update Sun Mar 13 00:19:32 2016 Paul Wery
+** Last update Sun Mar 20 22:37:23 2016 Paul Wery
 */
 
 #include <stdlib.h>
@@ -15,9 +15,14 @@
 void	aff_name(char *name)
 {
   int	n;
+  int	i;
 
   n = 0;
-  while (name[n] != '.' && name[n] != '\0')
+  i = 0;
+  while (name[i] != '.' && name[i] != '\0')
+    i += 1;
+  i = go_point(name, i);
+  while (n < i && name[n] != '\0')
     {
       write(1, &name[n], 1);
       n += 1;
