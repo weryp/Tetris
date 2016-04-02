@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sat Mar 12 17:32:21 2016 Paul Wery
-** Last update Sat Mar 12 17:59:25 2016 Paul Wery
+** Last update Sat Apr  2 20:01:19 2016 Paul Wery
 */
 
 #include <sys/types.h>
@@ -19,7 +19,7 @@ void	save_in_file(char *buffer)
   int	fd;
 
   if ((fd = open("datas/high_score", O_CREAT | O_APPEND | O_WRONLY
-                   | O_TRUNC)) == - 1)
+		 | O_TRUNC, S_IRUSR | S_IWUSR)) == - 1)
     return ;
   if (write(fd, buffer, 5) == -1)
     return ;

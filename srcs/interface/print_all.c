@@ -1,22 +1,22 @@
 /*
-** print_all.c for print_all in /home/hoarau/Code/PSU/PSU_2015_tetris
+** print_all.c for print_all in /home/wery_p/rendu/PSU_2015_tetris/srcs/interface
 **
-** Made by Victor Hoarau
-** Login   <hoarau_v@epitech.net>
+** Made by Paul Wery
+** Login   <wery_p@epitech.net>
 **
-** Started on  Sat Mar  5 20:11:47 2016 Victor Hoarau
-** Last update Tue Mar 15 22:32:10 2016 Paul Wery
+** Started on  Sat Apr  2 20:01:48 2016 Paul Wery
+** Last update Sat Apr  2 20:15:13 2016 Paul Wery
 */
 
-# include "print_param.h"
+#include "print_param.h"
 
-int		print_all(t_display_env *data, char *title)
+int		print_all(t_display_env *data, char *header)
 {
   static int	turn = 0;
 
   attron(COLOR_PAIR(6));
   if (turn == 0)
-    print_title(title);
+    print_header(header);
   print_state_game(data);
   if (data->ev->hide_tet == 0)
     print_next_tetrimino(data);

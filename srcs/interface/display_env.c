@@ -1,16 +1,16 @@
 /*
-** update_display.c for tetris in /home/hoarau_v/Systeme_Unix/PSU_2015_tetris
+** display_env.c for display_env in /home/wery_p/rendu/PSU_2015_tetris/srcs/interface
 **
-** Made by victor hoarau
-** Login   <hoarau_v@epitech.net>
+** Made by Paul Wery
+** Login   <wery_p@epitech.net>
 **
-** Started on  Mon Feb 29 16:17:42 2016 victor hoarau
-** Last update Sun Mar 13 22:41:40 2016 Paul Wery
+** Started on  Sat Apr  2 20:02:13 2016 Paul Wery
+** Last update Sat Apr  2 20:14:32 2016 Paul Wery
 */
 
-# include <stdlib.h>
-# include <ncurses.h>
-# include "print_param.h"
+#include <stdlib.h>
+#include <ncurses.h>
+#include "print_param.h"
 
 void	print_nbr(int nb, int line, int col)
 {
@@ -23,12 +23,12 @@ void	print_nbr(int nb, int line, int col)
   mvprintw(line, col, c);
 }
 
-void	print_title(char *title)
+void	print_header(char *header)
 {
-  if (title != NULL)
+  if (header != NULL)
     {
-      mvprintw(0, 0, title);
-      free(title);
+      mvprintw(0, 0, header);
+      free(header);
     }
   else
     mvprintw(0, 0, "TETRIS");

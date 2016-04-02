@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 07:09:19 2016 Paul Wery
-** Last update Mon Mar 14 14:00:31 2016 Paul Wery
+** Last update Sat Apr  2 20:16:22 2016 Paul Wery
 */
 
 #include <ncurses.h>
@@ -84,9 +84,9 @@ void	start_ncurses(t_tetris *tet, t_events *ev,
 		      SCREEN *scr, int end)
 {
   char	**map;
-  char	*title;
+  char	*header;
 
-  title = get_title("datas/title.txt");
+  header = get_header();
   if ((map = ini_tetris(ev)) != NULL && ev->nb_tet > 0 &&
       ev->cols >= ev->m_w && ev->lines >= ev->m_h)
     while (cstr(ev->key, ev->key_quit) == 0)
@@ -96,7 +96,7 @@ void	start_ncurses(t_tetris *tet, t_events *ev,
 	  return ;
 	generate_tetrimino(ev);
 	if (end == 0)
-	  link_with_game(ev, tet, title);
+	  link_with_game(ev, tet, header);
 	if (end == 0)
 	  if ((end = moove_tetrimino(map, tet, ev, 1)) == -1)
 	    end_message(map, ev);

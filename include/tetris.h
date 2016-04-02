@@ -5,7 +5,7 @@
 ** Login   <wery_p@epitech.net>
 **
 ** Started on  Sun Feb 28 06:40:29 2016 Paul Wery
-** Last update Sun Mar 20 22:37:12 2016 Paul Wery
+** Last update Sat Apr  2 20:13:02 2016 Paul Wery
 */
 
 #ifndef TETRIS_H_
@@ -177,6 +177,7 @@ int		check_fonc(int fonc, char **av, int n);
 int		check_line(char *buffer, int n);
 char		*realloc_w(char *str, int new_size);
 int		go_point(char *file, int n);
+char		*get_header(void);
 
 # include "print_param.h"
 

@@ -5,7 +5,7 @@
 ## Login   <wery_p@epitech.net>
 ##
 ## Started on  Sun Feb 28 06:27:14 2016 Paul Wery
-## Last update Sun Mar 20 14:33:52 2016 Paul Wery
+## Last update Sat Apr  2 20:12:22 2016 Paul Wery
 ##
 
 NAME	=	tetris
@@ -54,9 +54,7 @@ SRCS	=	srcs/game/main.c \
 		srcs/interface/save_hight_score.c \
 		srcs/interface/next_tetrimino.c \
 		srcs/interface/aff_next_tetrimino.c \
-		srcs/interface/get_title/get_title.c \
-		srcs/interface/get_title/get_next_line.c \
-		srcs/interface/get_title/my_stracat.c
+		srcs/interface/get_header.c
 
 $(NAME)	:	$(OBJS)
 		$(CC) $(OBJS) -o $(NAME) -lncurses
